@@ -1,0 +1,98 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no" />
+		<title>Weibo</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+		<link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+	</head>
+    <body>
+		<div id="bg">
+			<div id="outer">
+				<div id="header">
+					<div id="logo">
+						<h1>
+							<a href="#">Coffeelike</a>
+						</h1>
+					</div>
+					<div id="nav">
+						<ul>
+							<!--<li class="first active">
+								<a href="#">Home</a>
+							</li>
+							<li>
+								<a href="#">Services</a>
+							</li>
+							<li>
+								<a href="#">Portfolio</a>
+							</li>
+							<li>
+								<a href="#">About</a>
+							</li>
+							<li>
+								<a href="#">Blog</a>
+							</li>-->
+                            <li class="first active">
+                                <a class='' href="#">{{nick}}</a>
+                            </li>
+							<li class="last">
+                                <a class='' href="signout">退出</a>
+                            </li>
+						</ul>
+						<br class="clear" />
+					</div>
+				</div>
+				<div id="main">
+					<div id="sidebar">
+						<h3>
+							简介
+						</h3>
+						<p>
+							本人一直从事与软件的开发
+						</p>
+						<ul class="linkedList">
+							<li class="first">
+								<a href="#">微博</a>
+							</li>
+							<li>
+								<a href="#">博客</a>
+							</li>
+							<li>
+								<a href="http://t.qq.com/remore">作者</a>
+							</li>
+							<li class="last">
+								<a href="#">升级</a>
+							</li>
+						</ul>
+                        <h3>
+							可能认识的人
+						</h3>
+						<ul id='kown-boxes' class="head-list"></ul>
+					</div>
+                    <div id="content">
+                        <div id="box1">
+							<ul id='weibo-boxes'></ul>
+						</div>
+						<br class="clear" />
+					</div>
+					<br class="clear" />
+				</div>
+			</div>
+			<div id="copyright">
+				&copy; My Style | Design by <a href="http://t.qq.com/remore" rel="nofollow">--大志</a>
+			</div>
+		</div>
+        <!--==============================tmpl=================================-->
+		<div id='tmpl-boxes'></div>
+		{% include 'tmpl/weibo.tmpl' %}
+        {% include 'tmpl/head.tmpl' %}
+		<script type="text/javascript" src="{% static 'js/lib/jquery-1.10.2.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jsviews.js' %}" ></script>
+		<script type="text/javascript" src="{% static 'js/global.js' %}" ></script>
+    </body>
+</html>

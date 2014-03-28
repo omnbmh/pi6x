@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <title>Weibo</title>
+        <link rel="stylesheet" href="{% static 'css/lib/jquery.ui.all.css' %}">
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    </head>
+    <body>
+        <button id="tencent-weibo-login">腾讯微博登录</button>
+        <button id="tencent-qq-login">腾讯QQ登录</button>
+        <button id="sina-weibo-login">新浪微博登录</button>
+        <button id="sohu-weibo-login">搜狐微博登录</button>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">应用列表</a></li>
+                <li><a href="ajax/content1.html">应用管理</a></li>
+                <li><a href="ajax/content2.html">帐号管理</a></li>
+            </ul>
+            <div id="tabs-1">
+                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+            </div>
+        </div>
+        <script type="text/javascript" src="{% static 'js/lib/jquery-1.10.2.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.core.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.widget.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.button.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.tabs.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/sign.js' %}" ></script>
+    </body>
+</html>
