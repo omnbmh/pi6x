@@ -1,9 +1,11 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 import pi6x.views
-
+import weibo.urls
 from weibo.view import hello, home, signin, signout, ctime, send
 from weibo.api import auth_login, auth_callback, weibo_statuses_home_timeline, weibo_other_kownperson, weibo_post
+import event54.views
+import event.views
 
 admin.autodiscover()
 
@@ -14,6 +16,7 @@ urlpatterns = patterns('',
     
     # account manage page 
     url('^$', pi6x.views.index),
+    url('^app_list$', pi6x.views.app_list),
     #url('^auth/'),
     
     
@@ -27,6 +30,12 @@ urlpatterns = patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
     url(r'^weibo/', include(weibo.urls)),
+    url(r'^event54/$', event54.views.index),
+    url(r'^event54/authorize', event54.views.authorize),
+    #event
+    url(r'^event/$', event.views.index),
+    url(r'^event/create$', event.views.create),
+    
     #url(r'^hello/$', hello),
     #url(r'^time/$', 'firstsite.view.current_datetime', name='current_datetime'),
     #url(r'^time/(\d{1,2})/$', ctime),
