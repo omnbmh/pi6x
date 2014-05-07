@@ -4,7 +4,6 @@ from django import template
 from django.template.loader import get_template
 
 import urllib
-import urllib2
 import json
 
 # Create your views here.

@@ -7,7 +7,7 @@ from django import template
 from django.http import HttpResponse, HttpResponseRedirect,Http404
 from django.template.loader import get_template
 
-from tweibo import *
+#from tweibo import *
 
 __author__ = 'Chen Dezhi (c8d8z8@gmail.com)'
 __version__ = '1.0'
@@ -30,9 +30,9 @@ ACCESS_TOKEN = "c3337750b56e1ee3d35e669ebdea0eef"
 OPENID = "99A960D0C781A65640DD2A1BE48CCD6A"
 
 # 返回text是unicode，设置默认编码为utf8
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf8')
 
 def auth_login(req):
     oauth2 = OAuth2Handler()

@@ -1,9 +1,5 @@
-"""
-Tencent Weibo API for Python
-"""
-__version__ = '1.0'
-
-from oauth import OAuth2Handler
-from cat import APIError
-from sinaweibo import SinaWeiboAPI
-from sos import SosAPI
+# coding:utf-8
+#from oauth import OAuth2Handler
+#from cat import APIError
+#from sinaweibo import SinaWeiboAPI
+#from sos import SosAPI

@@ -7,7 +7,7 @@ from django.template.loader import get_template
 from sdk import *
 
 import urllib
-import urllib2
+#import urllib2
 import json
 
 # Create your views here.
