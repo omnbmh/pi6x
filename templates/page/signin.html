@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <title>pi6x</title>
+        <link rel="stylesheet" href="{% static 'css/lib/jquery.ui.all.css' %}">
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    </head>
+    <body>
+        <div id="login" title="登陆">
+			<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+		</div>
+		<div id="register" title="注册">
+			<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+		</div>
+        <script type="text/javascript" src="{% static 'js/lib/jquery-1.10.2.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery-ui.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.core.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.widget.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.button.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.tabs.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/signin.js' %}" ></script>
+    </body>
+</html>
