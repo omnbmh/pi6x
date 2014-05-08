@@ -7,8 +7,12 @@ import datetime
 
 # Create your views here.
 def index(req):
-    t = get_template('index.html')
-    c = template.Context({})
+    if 'user' in req.session:
+        t = get_template('index.html')
+        c = template.Context({})
+    else:
+        t = get_template('page/signin.html')
+        c = template.Context({})
     return HttpResponse(t.render(c))
     
 def app_list(req):
