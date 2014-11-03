@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+﻿#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # import lib
@@ -10,6 +10,15 @@ import json
 import time
 import json
 import urllib.parse
+
+# baidu login http request paramters
+client_id='_client_id=wappc_1368589871859_564'
+client_type='_client_type=2'
+client_version='_client_version=2.0.3'
+phone_imei='_phone_imei='
+net_type='net_type=3'
+vcode_md5='vcode_md5='
+pn='pn=1'
 
 def httpReady(url,data=None,cookie=None):
     #request url
@@ -31,105 +40,8 @@ def baiduUtf(data):
     #return urllib.quote_plus(datagb.encode('UTF-8'))
     return urllib.parse.quote(datagb.encode('utf-8'))
 
-
-class Account:
-    client_id='_client_id=wappc_1368589871859_564'
-    client_type='_client_type=2'
-    client_version='_client_version=2.0.3'
-    phone_imei='_phone_imei='
-    net_type='net_type=3'
-    vcode_md5='vcode_md5='
-    pn='pn=1'
-    tieba=[]
-    def __init__(self,user=None,password=None,bduss=None):
-        if bduss:
-            self.bduss=bduss
-            if user:
-                self.user=user
-            else:
-                self.user=''
-        else:
-            self.user=user
-            self.password=password
-            self.login()
-            
-    def login(self):
-        # login func
-        sign='&sign='
-        print(self.password)
-        password='passwd='+base64.b64encode(self.password.encode('utf-8')).decode()
-        un="un="+baiduUtf(self.user)
-        signmd5=self.client_id+self.client_type+self.client_version+self.phone_imei+password+un+self.vcode_md5+"tiebaclient!!!"
-        signbase=self.client_id+"&"+self.client_type+'&'+self.client_version+'&'+self.phone_imei+'&'+password+'&'+un+'&'+self.vcode_md5
-        sign=sign+hashlib.md5(signmd5.encode()).hexdigest()
-        data=signbase+sign
-        url='http://c.tieba.baidu.com/c/s/login'
-        data=httpReady(url,data)
-        self.loginsplit(data)
-        return
-    
-    def loginsplit(self,logindata):
-        data=json.loads(logindata)
-        if data['error_code']=='0':
-                bduss=data['user']['BDUSS'].encode('utf-8')
-                self.bduss='BDUSS='+bduss.decode()
-                self.writebduss()
-                print(time.ctime(),self.user,'write bduss ok!')
-                return
-        else:
-            print(data)
-            print(time.ctime(), self.user,data['error_msg'])
-            return
-        
-    def like(self):
-        url="http://c.tieba.baidu.com/c/f/forum/favolike"
-        sign='&sign='
-        singbase=self.bduss+'&'+self.client_id+'&'+self.client_type+'&'+self.client_version+'&'+self.phone_imei+'&'+self.net_type+'&'+self.pn
-        signmd5=self.bduss+self.client_id+self.client_type+self.client_version+self.phone_imei+self.net_type+self.pn
-        sign=sign+hashlib.md5((signmd5+'tiebaclient!!!').encode()).hexdigest()
-        data=singbase+sign
-        data=httpReady(url,data)
-        self.likesplit(data)
-        return
-    
-    def likesplit(self,likedata):
-        data=json.loads(likedata)
-        list=data['forum_list']
-        for x in list:
-            self.tieba.append(x['name'].encode('gbk'))
-        self.tbs='tbs='+data['anti']['tbs']#.encode('utf-8')
-        return
-    
-    def sign(self):
-        self.like()
-        url='http://c.tieba.baidu.com/c/c/forum/sign'
-        for x in self.tieba:
-            kw='kw='+x.decode('gbk')
-            sign='&sign='
-            signmd5=self.bduss+kw+self.tbs+'tiebaclient!!!'
-            signbase=self.bduss+'&'+kw+'&'+self.tbs
-            sign=sign+hashlib.md5(signmd5.encode('utf-8')).hexdigest()
-            data=signbase+sign
-            data=httpReady(url,data)
-            self.signsplit(data,x)
-            time.sleep(2)
-        return
-    
-    def signsplit(self,signdata,x):
-        data=json.loads(signdata)
-        if data['error_code']=='0':
-            print(time.ctime(), self.user,x,data['user_info'])
-        else:
-            print(time.ctime(), self.user,x,data['error_msg'])
-
-    def writebduss(self):
-        file_object = open('load.bduss', 'w')
-        file_object.write(self.bduss)
-        file_object.close()
-
-
-
 def readbduss():
+    #read bduss file
     try:
         flie=open('load.bduss','r')
         bduss=flie.read()
@@ -142,36 +54,12 @@ def readbduss():
             return
     except:
         return
-def star():
-    ss=input('请输入百度账号密码')
-    if ss.upper()=='Y'or ss=='y':
-        autobduss()
-    elif ss.upper()=='N':
-        nobduss()
-    else:
-        print('账号。密码')
-        star()
         
-def nobduss():
-    user=input('账号:')
-    password=input('密码:')
-    print(user, password)
-    aa=Account(user,password)
-    if aa.bduss:
-        aa.sign()
-    else:
-        nobduss()
-
-    
-def autobduss():
-    bduss=readbduss()
-    if bduss:
-        aa=Account(bduss=bduss)
-        print('加载 bduss')
-        aa.sign()
-    else:
-        print('bduss')
-        nobduss()
+def writebduss(bduss):
+    # write bduss file
+    file_object = open('load.bduss', 'w')
+    file_object.write(bduss)
+    file_object.close()
 
 def islogin(bduss):
     url='http://tieba.baidu.com/dc/common/tbs'
@@ -181,5 +69,81 @@ def islogin(bduss):
         return True
     else:
         return False
+def sign(bduss):
+    # get tieba list
+    url="http://c.tieba.baidu.com/c/f/forum/favolike"
+    singbase= bduss +'&'+ client_id+'&'+ client_type+'&'+ client_version+'&'+ phone_imei+'&'+ net_type+'&'+ pn
+    signmd5= bduss + client_id+ client_type+ client_version+ phone_imei+ net_type+ pn
+    sign = '&sign=' + hashlib.md5((signmd5+'tiebaclient!!!').encode()).hexdigest()
+    data=singbase+sign
+    data=httpReady(url,data)
+    print(data)
+    tieba = []
+    data=json.loads(data)
+    list=data['forum_list']
+    for x in list:
+        tieba.append(x['name'].encode('gbk'))
     
-autobduss()
+    tbs='tbs='+data['anti']['tbs']
+    
+    
+    url='http://c.tieba.baidu.com/c/c/forum/sign'
+    for x in  tieba:
+        kw='kw='+x.decode('gbk')
+        sign='&sign='
+        signmd5= bduss + kw + tbs + 'tiebaclient!!!'
+        signbase= bduss +'&'+ kw + '&' + tbs
+        sign=sign+hashlib.md5(signmd5.encode('utf-8')).hexdigest()
+        data=signbase+sign
+        data=httpReady(url,data)
+        data=json.loads(data)
+        print(data)
+        if data['error_code']=='0':
+            print(time.ctime(), x, data['user_info'])
+        else:
+            print(time.ctime(), x, data['error_msg'])
+        time.sleep(2)
+    return
+    
+def namepwd_login(user=None, password=None):
+    # login paramters
+    
+    password='passwd='+base64.b64encode(password.encode('utf-8')).decode()
+    un="un="+baiduUtf(user)
+    signmd5= client_id+ client_type+ client_version+ phone_imei+password+un+ vcode_md5+"tiebaclient!!!"
+    
+    signbase= client_id+"&"+ client_type+'&'+ client_version+'&'+ phone_imei+'&'+password+'&'+un+'&'+ vcode_md5
+    sign='&sign=' + hashlib.md5(signmd5.encode()).hexdigest()
+    
+    data=signbase+sign
+    url='http://c.tieba.baidu.com/c/s/login'
+    # start login
+    data=httpReady(url,data)
+    data=json.loads(data)
+    
+    if data['error_code']=='0':
+        #login success & need save bduss
+        bduss=data['user']['BDUSS'].encode('utf-8')
+        bduss = 'BDUSS='+bduss.decode()
+        writebduss(bduss)
+        print(time.ctime(), user, data['user'])
+    else:
+        #login failed
+        print(data)
+        print(time.ctime(), user, data['error_msg'])
+    return bduss
+    
+def auto_login():
+    bduss=readbduss()
+    if bduss:
+        sign(bduss)
+    else:
+        user=input('请输入账号:')
+        password=input('请输入密码:')
+        bduss = namepwd_login(user,password)
+        sign(bduss)
+
+        
+    
+
+auto_login()
