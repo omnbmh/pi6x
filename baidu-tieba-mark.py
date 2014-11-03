@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+# import lib
 import urllib.request
 #import md5
 import hashlib
@@ -53,6 +54,7 @@ class Account:
             self.login()
             
     def login(self):
+        # login func
         sign='&sign='
         print(self.password)
         password='passwd='+base64.b64encode(self.password.encode('utf-8')).decode()
@@ -141,7 +143,7 @@ def readbduss():
     except:
         return
 def star():
-    ss=input('请输入百度站好密码')
+    ss=input('请输入百度账号密码')
     if ss.upper()=='Y'or ss=='y':
         autobduss()
     elif ss.upper()=='N':
