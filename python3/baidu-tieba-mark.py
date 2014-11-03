@@ -8,7 +8,6 @@ import hashlib
 import base64
 import json
 import time
-import json
 import urllib.parse
 
 # baidu login http request paramters
