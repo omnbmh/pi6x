@@ -1,6 +1,11 @@
 ﻿#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+curdir = os.path.dirname(sys.argv[0])
+os.chdir(curdir)
+##########################################################################
 # config logging
 import logging
 import logging.config
@@ -8,6 +13,8 @@ import logging.config
 logging.config.fileConfig('logging.conf')
 logger = logging.getLogger('baidu')
 ##########################################################################
+
+
 import urllib.request
 #import md5
 import hashlib
@@ -131,11 +138,11 @@ def namepwd_login(user=None, password=None):
         bduss=data['user']['BDUSS'].encode('utf-8')
         bduss = 'BDUSS='+bduss.decode()
         writebduss(bduss)
-        logger.info(user + data['user'])
+        logger.info(data['user'])
     else:
         #login failed
         logger.debug(data)
-        logger.info(user + data['error_msg'])
+        logger.info(data['error_msg'])
     return bduss
     
 def auto_login():
