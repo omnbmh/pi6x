@@ -1,7 +1,13 @@
 ﻿#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# import lib
+# config logging
+import logging
+import logging.config
+
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger('baidu')
+##########################################################################
 import urllib.request
 #import md5
 import hashlib
@@ -48,7 +54,7 @@ def readbduss():
         if islogin(bduss):
             return bduss
         else:
-            print('没有发现bduss文件')
+            logger.warning('没有发现bduss文件')
             nobduss()
             return
     except:
@@ -76,7 +82,7 @@ def sign(bduss):
     sign = '&sign=' + hashlib.md5((signmd5+'tiebaclient!!!').encode()).hexdigest()
     data=singbase+sign
     data=httpReady(url,data)
-    print(data)
+    logger.debug(data)
     tieba = []
     data=json.loads(data)
     list=data['forum_list']
@@ -96,11 +102,11 @@ def sign(bduss):
         data=signbase+sign
         data=httpReady(url,data)
         data=json.loads(data)
-        print(data)
+        logger.debug(data)
         if data['error_code']=='0':
-            print(time.ctime(), x, data['user_info'])
+            logger.info(x.decode('gbk')+ data['user_info'])
         else:
-            print(time.ctime(), x, data['error_msg'])
+            logger.info(x.decode('gbk') + data['error_msg'])
         time.sleep(2)
     return
     
@@ -125,11 +131,11 @@ def namepwd_login(user=None, password=None):
         bduss=data['user']['BDUSS'].encode('utf-8')
         bduss = 'BDUSS='+bduss.decode()
         writebduss(bduss)
-        print(time.ctime(), user, data['user'])
+        logger.info(user + data['user'])
     else:
         #login failed
-        print(data)
-        print(time.ctime(), user, data['error_msg'])
+        logger.debug(data)
+        logger.info(user + data['error_msg'])
     return bduss
     
 def auto_login():
@@ -141,8 +147,5 @@ def auto_login():
         password=input('请输入密码:')
         bduss = namepwd_login(user,password)
         sign(bduss)
-
-        
-    
 
 auto_login()
