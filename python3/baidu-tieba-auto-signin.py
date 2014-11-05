@@ -3,6 +3,7 @@
 
 import os
 import sys
+print(sys.argv[0])
 curdir = os.path.dirname(sys.argv[0])
 os.chdir(curdir)
 ##########################################################################
@@ -111,7 +112,7 @@ def sign(bduss):
         data=json.loads(data)
         logger.debug(data)
         if data['error_code']=='0':
-            logger.info(x.decode('gbk')+ data['user_info'])
+            logger.info(x.decode('gbk') + data['error_code'])
         else:
             logger.info(x.decode('gbk') + data['error_msg'])
         time.sleep(2)
