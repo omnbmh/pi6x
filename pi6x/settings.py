@@ -26,7 +26,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates')
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 ALLOWED_HOSTS = []
@@ -81,7 +81,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Aria/Shanghai'
 
 USE_I18N = True
 
@@ -98,6 +98,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'resources'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 # cache framework
