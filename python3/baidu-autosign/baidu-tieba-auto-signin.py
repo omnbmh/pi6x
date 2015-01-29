@@ -1,18 +1,17 @@
 ﻿#!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
-from mtools.pathtools import *
-os.chdir(cur_file_dir(sys.path[0]))
+# -*- author: c8d8z8@gmail.com
 
 # config logging
-from mtools.loggingtools import *
-logger = getLogger('baidu')
-
+import logging
+import logging.config
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger('baidu-tieba')
+logger.info('logging startup');
 #python3 之后 configparser 模块 要小写
 import configparser
 config = configparser.ConfigParser()
 config.readfp(open('baidu-tieba.ini'))
-
 base_dir = config.get('global','base_dir')
 name = config.get('global','name')
 
