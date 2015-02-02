@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django import template
 from django.template.loader import get_template
 
+import os
 import datetime
 
 # Create your views here.
@@ -30,5 +31,6 @@ def homepage(req):
     
 def sysctl(req):
     t = get_template('sysctl.html')
-    c = template.Context({})
+    i = os.popen('systeminfo').readline()
+    c = template.Context({"info":i})
     return HttpResponse(t.render(c))
