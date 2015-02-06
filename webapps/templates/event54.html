@@ -1,0 +1,27 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <title>54Event</title>
+        <link rel="stylesheet" href="{% static 'css/lib/jquery.ui.all.css' %}">
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    </head>
+    <body>
+        <div>用户{{uid}} 验证码{{access_token}}</div>
+        <div id="vote-box">
+            <div id='vote-title'></div>
+        </div>
+        <button id="tencent-qq-login">腾讯QQ登录</button>
+        <button id="sina-weibo-login">新浪微博登录</button>
+        <button id="anonymous-login">匿名登录</button>
+        <script type="text/javascript" src="{% static 'js/lib/jquery-1.10.2.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.core.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.widget.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.button.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/lib/jquery.ui.tabs.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/event54.js' %}" ></script>
+    </body>
+</html>

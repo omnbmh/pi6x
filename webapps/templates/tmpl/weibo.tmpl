@@ -1,0 +1,21 @@
+{% verbatim %}
+<script id='weibo' type='text/x-jsrender'><li e-data='{{:id}}'><article>
+    <div class="heading"><h4 class="title">{{:nick}} 在 {{:timestamp}} 创建 - {{:mcount}} 评论  {{:count}} 转发</h4></div>
+    {{for image}}
+    <img alt='{{:nick}}' e-type='img' e-data='{{:#data}}/2000' src='{{:#data}}/240'>
+    {{/for}}
+    <div class="content">
+        <p e-type='text'>{{:text}}</p>
+    </div>
+    <div class="extra">
+        <div class="info"></div>
+        <div class="more">
+            <a href="http://t.qq.com/p/t/{{:id}}" target='_blank' class="btn" action-type='detail'>详情</a>
+            <a href="#" class="btn" action-type='forward'>转发</a>
+            <a href="#" class="btn" action-type='comment'>评论</a>
+            <a href="#" class="btn" action-type='post'>发送</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    </article></li></script>
+{% endverbatim %}
