@@ -145,10 +145,11 @@ void loop(){
        digitalWrite(13, on ? HIGH : LOW);
        dump(&results);
     }
+    /*
     if (results.value == auto){
       autoFunc();
     }
-   
+   */
     switch(results.value){
       case qian:
         qianFunc();
@@ -170,6 +171,7 @@ void loop(){
         break;
       default:
          autoFunc(); 
+         break;
     }
     
     //delay(600);      
