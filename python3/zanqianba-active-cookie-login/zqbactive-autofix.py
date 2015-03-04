@@ -41,6 +41,7 @@ def postData(url, data) :
     
 import json
 import datetime
+import math
 
 def login(u,p):
     url = "http://zqbam.creditease.corp/pages/zqActiveUser/loginZqActiveUser.do"
@@ -52,8 +53,12 @@ def login(u,p):
     rt = postData(url,data)
     return json.loads(rt)
     
-#修复计划执行状态
 def fixplanexecution(pid,status):
+    '''
+    修改计划执行状态 
+    0 成功
+    8 支付失败
+    '''
     url = "http://zqbam.creditease.corp/pages/zqPlanexecution/showZqPlanexecution.do"
     data = {'pkPlanexexcution':pid,'page':'1','rows':'20'}
     rt = postData(url,data)
@@ -62,7 +67,6 @@ def fixplanexecution(pid,status):
     if (jrt['total'] >= 0):
         planexecution = jrt["rows"][0]
         logger.debug(planexecution)
-        # 修改计划执行状态
         url = "http://zqbam.creditease.corp/pages/zqPlanexecution/modZqPlanexecution.do"
         data = {"pkPlanexexcution":pid,"state":status}
         rt = postData(url,data)
@@ -74,19 +78,19 @@ def fixplanexecution(pid,status):
 def fixloanmoney(pid,planexecution):
     # 查询总投资
     url = "http://zqbam.creditease.corp/pages/zqLoanmoney/showZqLoanmoney.do"
-    data = "fkPlan="+ planexecution['fkPalnexecutionPlan'] +"&page=1&rows=20&sort=pkLoanmoney&order=desc"
+    data = {"fkPlan":planexecution['fkPalnexecutionPlan'],"page":1,"rows":20,"sort":'pkLoanmoney',"order":"desc"}
     rt = postData(url,data)
     jrt = json.loads(rt)
     logger.info('查询到总投资' + str(jrt['total']) + '条')
     if jrt['total'] <= 0: # 没有总投资
         # 增加一条总投资
         url = "http://zqbam.creditease.corp/pages/zqLoanmoney/addZqLoanmoney.do"
-        data = "loanamount=" + planexecution["amount"] + "&invesetid=" + planexecution["investid"] + "&fkPlan=" + planexecution["fkPalnexecutionPlan"] + "&flag=0&createtime=&updatetime=&updateuser=&remark="
-        rt = httpReady(url,data)
+        data = {"loanamount":planexecution["amount"], "invesetid":planexecution["investid"],"fkPlan" : planexecution["fkPalnexecutionPlan"], "flag":0}
+        rt = postData(url,data)
         logger.info('添加总投资结果'+rt)
         url = "http://zqbam.creditease.corp/pages/zqLoanmoney/showZqLoanmoney.do"
-        data = "fkPlan=" +planexecution["fkPalnexecutionPlan"]+ "&page=1&rows=20&sort=pkLoanmoney&order=desc"
-        rt = httpReady(url,data)
+        data = {"fkPlan":planexecution['fkPalnexecutionPlan'],"page":1,"rows":20,"sort":'pkLoanmoney',"order":"desc"}
+        rt = postData(url,data)
         jrt = json.loads(rt)
         #获得总投资信息
     loanmoney = jrt['rows'][0]
@@ -95,26 +99,26 @@ def fixloanmoney(pid,planexecution):
 def fixloanmoneydet(pid,planexecution,loanmoney):
     #查询详细投资
     url = "http://zqbam.creditease.corp/pages/zqLoanmoneydet/showZqLoanmoneydet.do"
-    data = "fkPlanexecution=" + pid + "&page=1&rows=20&sort=pkLoanmoneydet&order=desc"
-    rt = httpReady(url,data)
+    data = {"fkPlanexecution":pid,"page":1,"rows":20,"sort":'pkLoanmoneydet',"order":"desc"}
+    rt = postData(url,data)
     jrt = json.loads(rt)
     logger.info('查询到详细投资' + str(jrt['total']) + '条')
     if jrt['total'] <= 0: # 没有详细投资
         # 增加一条详细投资
         url =  "http://zqbam.creditease.corp/pages/zqLoanmoneydet/addZqLoanmoneydet.do"
-        data = "fkLoanmoney="+loanmoney["pkLoanmoney"]+"&loanamount="+str(planexecution['amount'])+"&invesetid="+ loanmoney['invesetid']+"&fkPlanexecution="+pid+"&state=1&flag=0&cashierTime=2015-02-02+14%3A06%3A29&effectiveTime=2015-02-02+14%3A06%3A35&loanId=0&createtime=&updatetime=&updateuser=&remark=&addflag=1"
-        rt = httpReady(url,data)
+        data = {"fkLoanmoney":loanmoney["pkLoanmoney"],"loanamount":str(planexecution['amount']),"invesetid":loanmoney['invesetid'],"fkPlanexecution":pid,"state":1,"flag":0,"cashierTime":'2015-02-02 14:06:29',"effectiveTime":'2015-02-02 14:06:35','loanId':0,"addflag":1}
+        rt = postData(url,data)
         logger.info('添加详细投资结果'+rt)
         
-def fixdayinterestlog(planexecution):
+def fixdayinterestlog(planexecution,plan):
     #更新收益
     paydate = planexecution['paysuccdate']
     paydate = datetime.datetime.strptime(paydate,'%Y%m%d')
     oneday = datetime.timedelta(days=1)
     interestdate = paydate + oneday
     
-    #计算日收益 (amount*rate/365)*period
-    num = float(str('%.2f'%(planexecution['amount'] * planexecution['rate'] / 365))) * planexecution['period']
+    #计算日收益 (amount*rate/365)*period  # math.ceil(round(500 * 0.1 / 365,3)*100)/100
+    num = math.ceil(round(planexecution['amount'] * planexecution['rate'] / 365,3)*100)/100*plan['alreadyperiod']
     data = {'planid':planexecution['fkPalnexecutionPlan'],'dayamont':num,'createtime':interestdate.strftime('%Y-%m-%d'),'updatetime':datetime.datetime.now().strftime('%Y-%m-%d')}
     rt = postData('http://zqbam.creditease.corp/pages/zqDayinterestlog/modZqDayinterestlogBatch.do',data)
     logger.info('修改收益结果'+rt)
@@ -132,16 +136,30 @@ def fixplannl(planexecution):
         data = {'pkPlan':planexecution['fkPalnexecutionPlan'],'interestamountnl':tnum}
         rt = postData('http://zqbam.creditease.corp/pages/zqPlan/modZqPlan.do',data)
         logger.info('修改计划界面收益结果'+rt)
-    
+def searchplan(planexecution):
+    data = {"pkPlan":planexecution['fkPalnexecutionPlan'],"page":1,"rows":20,"sort":'pkPlan',"order":"desc"}
+    rt = postData('http://zqbam.creditease.corp/pages/zqPlan/showZqPlan.do',data);
+    jrt = json.loads(rt)
+    plan = jrt['rows'][0]
+    return plan
+        
 def fixplan(pid):
-    planexecution = fixplanexecution(pid,"0") # 0 成功
+    '''
+    修复有问题的计划
+    '''
+    planexecution = fixplanexecution(pid,"0")
     if planexecution:
-        #loanmoney = fixloanmoney(pid,planexecution)
-        #fixloanmoneydet(pid,planexecution,loanmoney)
-        fixdayinterestlog(planexecution)
+        plan = searchplan(planexecution)
+        loanmoney = fixloanmoney(pid,planexecution)
+        fixloanmoneydet(pid,planexecution,loanmoney)
+        fixdayinterestlog(planexecution,plan)
         fixplannl(planexecution)
+    
 def batch():
-    jrt = login('chendezhi','888888') # login
+    '''
+    读取pid.txt文件 获得计划执行id 批量执行
+    '''
+    jrt = login('chendezhi','888888')
     if(jrt['total'] > 0):
         logger.info('登陆成功')
     else:
