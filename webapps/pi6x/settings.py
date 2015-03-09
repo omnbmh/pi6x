@@ -27,6 +27,7 @@ TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'zanqianba_unump_app/templates'),
 )
 
 ALLOWED_HOSTS = []
@@ -98,7 +99,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'resources'),
-    #os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'zanqianba_unump_app/resources'),
 )
 
 # cache framework

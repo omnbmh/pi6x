@@ -5,7 +5,7 @@ int enablePin = 11;
 int in1Pin = 10;
 int in2Pin = 9;
 
-int speed = 250;
+int speed = 20;
 boolean direction = 0;
 
 void setMotor(int speed, boolean reverse){
