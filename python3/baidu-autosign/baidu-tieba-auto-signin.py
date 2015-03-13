@@ -1,13 +1,16 @@
 ﻿#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # -*- author: c8d8z8@gmail.com
-
+'''
+    百度贴吧自动签到
+'''
 # config logging
 import logging
 import logging.config
 logging.config.fileConfig('logging.conf')
 logger = logging.getLogger('baidu-tieba')
 logger.info('logging startup');
+
 #python3 之后 configparser 模块 要小写
 import configparser
 config = configparser.ConfigParser()
@@ -33,17 +36,24 @@ vcode_md5='vcode_md5='
 pn='pn=1'
 
 def httpReady(url,data=None,cookie=None):
+    logger.debug('-----request start-----')
+    logger.debug('request url:'+url)
     #request url
     if data:
+        logger.debug('request data:'+data)
         req=urllib.request.Request(url,data.encode('utf-8'))
     else:
         req=urllib.request.Request(url)
     #add cookie
     if cookie:
+        logger.debug('request cookie:'+cookie)
         req.add_header('Cookie',cookie)    
     #emulate iphone 5s
     req.add_header('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53')
     v=urllib.request.urlopen(req).read().decode('raw_unicode_escape')
+    logger.debug('-response-')
+    logger.debug(v)
+    logger.debug('-----request end-----')
     return v
 
 def bdussFile():
@@ -93,13 +103,11 @@ def sign(bduss):
     sign = '&sign=' + hashlib.md5((signmd5+'tiebaclient!!!').encode()).hexdigest()
     data=singbase+sign
     data=httpReady(url,data)
-    logger.debug(data)
     tieba = []
     data=json.loads(data)
     list=data['forum_list']
     for x in list:
         tieba.append(x['name'].encode('gbk'))
-    
     tbs='tbs='+data['anti']['tbs']
     
     
@@ -113,11 +121,10 @@ def sign(bduss):
         data=signbase+sign
         data=httpReady(url,data)
         data=json.loads(data)
-        logger.debug(data)
         if data['error_code']=='0':
-            logger.info(x.decode('gbk') + data['error_code'])
+            logger.info(x.decode('gbk') + '吧 签到成功！')
         else:
-            logger.info(x.decode('gbk') + data['error_msg'])
+            logger.info(x.decode('gbk') + '吧 签到失败！ 失败原因:' + data['error_msg'])
         time.sleep(2)
     return
     
@@ -145,7 +152,6 @@ def namepwd_login(user=None, password=None):
         logger.info(data['user'])
     else:
         #login failed
-        logger.debug(data)
         logger.info(data['error_msg'])
     return bduss
     
