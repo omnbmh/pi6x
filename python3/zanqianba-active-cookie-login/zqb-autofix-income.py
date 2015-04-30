@@ -31,6 +31,9 @@ def batch():
         planexecutions = zqb.select_plan_execution(0)
         if zqb.plan and planexecutions:
             for i in range(0,len(planexecutions)):
+                #只修复最近五期的收益
+                if(i>4):
+                    break
                 cur_pe = planexecutions[i]
                 next_pe = None if i == 0 else planexecutions[i-1]
                 
