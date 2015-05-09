@@ -173,6 +173,21 @@ class ZQB():
         self.log_info('添加详细投资结果'+rt)
         return self.select_loanmoneydet(planexecution)
     
+    def insert_planexecution(self,planexecution,status):
+        '''
+        增加计划执行状态 
+        默认 8 支付失败
+        '''
+        if (planexecution):
+            url = "http://zqbam.creditease.corp/pages/zqPlanexecution/addZqPlanexecution.do"
+            data = {"pkPlanexexcution":planexecution['pkPlanexexcution'],"state":status}
+            rt = ZQB.request(url,data)
+            self.log_info('修改计划执行状态结果'+rt)
+            self.planexecutionid=planexecution['pkPlanexexcution']
+            return self.select_plan_execution(0)
+        else:
+            return
+    
     def update_planexecution(self,planexecution,status):
         '''
         修改计划执行状态 
@@ -188,6 +203,7 @@ class ZQB():
             return self.select_plan_execution(0)
         else:
             return
+            
     def select_dayinterestlog(self, plan):
         data = {"planid":plan['pkPlan'],"page":1,"rows":20,"sort":'interestdate',"order":"asc"}
         rt = ZQB.request('http://zqbam.creditease.corp/pages/zqDayinterestlog/showZqDayinterestlog.do',data)

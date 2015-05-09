@@ -23,7 +23,7 @@ def batch():
     #for line in open("planexecutionid.txt"):
         line = line.strip('\r\n')
         zqb = zqblib.ZQB(line)
-        if (not zqb.plan) and (not zqb.planexecutions):
+        if (not zqb.plan):
             continue
         
         #计划的开始日期
@@ -33,17 +33,17 @@ def batch():
         #当前期数
         now_period = zqb.plan['nowperiod']
         
-        new_now_p = 
+        one_month = datetime.timedelta(months=1)
         
-        planexecution = zqb.planexecutions[0] # 取最新的计划执行
-        loanmoney = zqb.select_loanmoney()
-        if not loanmoney:
-            loanmoney = zqb.insert_loanmoney(zqb.plan)
-        loanmoneydets = zqb.select_loanmoneydet(planexecution)
-        if not loanmoneydets:
-            loanmoneydets = zqb.insert_loanmoneydet(planexecution,loanmoney)
+        now_p = 2;
+        while start_date + one_month > datetime.now():
+            start_date += one_month
+            now_p+=1
+            
+        #now_p -= 1
+        #start_date -= one_month
         
-        zqb.update_dayinterestlog(planexecution,zqb.plan)
-        zqb.update_plannl()
+        if start_date < end_date:
+            zqb.insert_planexecution()
         
 batch()
