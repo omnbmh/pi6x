@@ -17,6 +17,7 @@ config = configparser.ConfigParser()
 config.readfp(open('baidu-tieba.ini'))
 base_dir = config.get('global','base_dir')
 name = config.get('global','name')
+interval = config.get('global','interval')
 
 import urllib.request
 #import md5
@@ -125,7 +126,7 @@ def sign(bduss):
             logger.info(x.decode('gbk') + '吧 签到成功！')
         else:
             logger.info(x.decode('gbk') + '吧 签到失败！ 失败原因:' + data['error_msg'])
-        time.sleep(2)
+        time.sleep(float(interval))
     return
     
 def namepwd_login(user=None, password=None):
