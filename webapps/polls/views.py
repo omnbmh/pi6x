@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
 from django.views import generic
 
+from django.utils import timezone
+
 from .models import Question
 # Create your views here.
 def index(request):
