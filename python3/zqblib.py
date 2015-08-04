@@ -76,13 +76,13 @@ class ZQB():
         '''
         查询计划详情
         '''
-        data = {"planstate":0,"page":page,"rows":20,"sort":'pkPlan',"order":"desc"}
+        data = {"planstate":0,"page":page,"rows":50,"sort":'pkPlan',"order":"desc"}
         # 调试参数
         #data['pkPlan'] = '5b5b38e7d20865e163a1df0c9af8364d'
         rt = ZQB.request('http://zqbam.creditease.corp/pages/zqPlan/showZqPlan.do',data);
         jrt = json.loads(rt)
-        self.log_info('查询到计划' + str(jrt['total']) + '条')
         if jrt['total'] >0:
+            self.log_info('查询到计划' + str(len(jrt['rows'])) + '条')
             return jrt['rows']
         return
         
