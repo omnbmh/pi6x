@@ -27,9 +27,8 @@ def batch():
     for line in open("planexecutionid.txt"):
         line = line.strip('\r\n')
         zqb = zqblib.ZQB()
-        planexecutions = zqb.select_plan_execution(line,11)
-        if planexecutions:
-            planexecution = planexecutions[0] # 取最新的计划执行
+        planexecution = zqb.select_plan_execution_by_id(line,11)
+        if planexecution:
             zqb.update_planexecution(planexecution,'0')
         
 batch()
