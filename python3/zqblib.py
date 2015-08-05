@@ -165,10 +165,11 @@ class ZQB():
         self.log_info('添加总投资结果'+rt)
         return self.select_loanmoney(planid)
     
-    def insert_loanmoneydet(self, planexecution, loanmoney):
+    def insert_loanmoneydet(self, planexecution, loanmoney, amount):
         # 增加一条详细投资
+        self.log_info('添加详细投资金额 '+ str(amount))
         url =  "http://zqbam.creditease.corp/pages/zqLoanmoneydet/addZqLoanmoneydet.do"
-        data = {"fkLoanmoney":loanmoney["pkLoanmoney"],"loanamount":str(planexecution['amount']),"invesetid":loanmoney['invesetid'],"fkPlanexecution":planexecution['pkPlanexexcution'],"state":1,"flag":0,"cashierTime":'2015-02-02 14:06:29',"effectiveTime":'2015-02-02 14:06:35','loanId':0,"addflag":1}
+        data = {"fkLoanmoney":loanmoney["pkLoanmoney"],"loanamount":str(amount),"invesetid":loanmoney['invesetid'],"fkPlanexecution":planexecution['pkPlanexexcution'],"state":1,"flag":0,"cashierTime":'2015-02-02 14:06:29',"effectiveTime":'2015-02-02 14:06:35','loanId':0,"addflag":1}
         rt = ZQB.request(url,data)
         self.log_info('添加详细投资结果'+rt)
         return self.select_loanmoneydet(planexecution)

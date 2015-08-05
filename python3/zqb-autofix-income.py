@@ -42,8 +42,17 @@ def batch():
                     loanmoney = zqb.insert_loanmoney(zqb.plan)
                 loanmoneydets = zqb.select_loanmoneydet(cur_pe)
                 if not loanmoneydets:
-                    loanmoneydets = zqb.insert_loanmoneydet(cur_pe,loanmoney)
-                
+                    zqb.insert_loanmoneydet(cur_pe,loanmoney, cur_pe['amount'])
+                else:
+                    # 需要补的收益
+                    amount = 0;
+                    for l in loanmoneydets:
+                        amount = amount + l['loanamount'];
+                    # 保留2位小数
+                    amount = math.ceil(round(amount)*100)/100
+                    if amount < cur_pe['amount']:
+                        amount = math.ceil(round(cur_pe['amount'] - amount)*100)/100
+                        zqb.insert_loanmoneydet(cur_pe,loanmoney, cur_pe['amount'])
                 zqb.update_dayinterestlog(cur_pe,next_pe,len(planexecutions) - i)
         zqb.update_plannl()
         time.sleep(float(5))        
