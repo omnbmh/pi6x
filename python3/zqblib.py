@@ -152,8 +152,8 @@ class ZQB():
         data = {"fkPlanexecution":planexecution['pkPlanexexcution'],"page":1,"rows":20,"sort":'pkLoanmoneydet',"order":"desc"}
         rt = ZQB.request(url,data)
         jrt = json.loads(rt)
-        self.log_info('查询到详细投资' + str(jrt['total']) + '条')
         if jrt['total'] > 0:
+            self.log_info('查询到详细投资' + str(len(jrt['rows'])) + '条')
             return jrt['rows']
         return
     
@@ -246,7 +246,7 @@ class ZQB():
         num = math.ceil(round(planexecution['amount'] * planexecution['rate'] / 365,3)*100)/100*times
         data = {'planid':planexecution['fkPalnexecutionPlan'],'dayamont':num,'createtime':paydate.strftime('%Y-%m-%d'),'updatetime':next_paydate.strftime('%Y-%m-%d')}
         rt = ZQB.request('http://zqbam.creditease.corp/pages/zqDayinterestlog/modZqDayinterestlogBatch.do',data)
-        self.log_info('修改收益结果'+rt)
+        self.log_info('修改日收益结果'+rt)
         
     def update_plannl(self):
         #查询日收益
