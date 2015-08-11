@@ -11,7 +11,7 @@ import logging
 import logging.config
 logging.config.fileConfig('logging.conf')
 logger = logging.getLogger('zqb')
-#logger.info('日志模块加载成功')
+logger.info('日志模块加载成功')
 
 import hashlib
 import base64
@@ -32,8 +32,11 @@ urllib.request.install_opener(opener)
 #业务URL常量
 import constant
 
-def login(name,passwd):
-    data = {'userCode':name,'userPassword':passwd}
+USERNAME = 'wangfengyang'
+PASSWORD = '252518341'
+
+def login():
+    data = {'userCode':USERNAME,'userPassword':PASSWORD}
     ZQB.request(constant.LOGIN,data)
 
 class ZQB():

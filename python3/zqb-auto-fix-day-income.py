@@ -6,19 +6,12 @@
     此脚本修复未跑批导致的当前收益未产生的问题
 '''
 
-# config logging
-import logging
-import logging.config
-logging.config.fileConfig('logging.conf')
-logger = logging.getLogger('zqb')
-logger.info('日志模块加载成功')
-
 import json
 import datetime
 import math
 import zqblib
 import time
-jrt = zqblib.login('chendezhi','888888')
+jrt = zqblib.login()
     
 def batch():
     zqb = zqblib.ZQB(None)

@@ -2,17 +2,11 @@
 # -*- coding: utf-8 -*-
 # -*- author: c8d8z8@gmail.com
 
-# config logging
-import logging
-import logging.config
-logging.config.fileConfig('logging.conf')
-logger = logging.getLogger('zqb')
-
 import json
 import datetime
 import math
 import zqblib
-jrt = zqblib.login('chendezhi','888888')
+jrt = zqblib.login()
     
 def batch():
     '''
