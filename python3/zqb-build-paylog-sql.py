@@ -14,7 +14,7 @@ SQL = "INSERT INTO ZQ_PAYLOG(PK_PAYLOG, PLANEXEXCUTIONID, CHNID, BIZID, MEDIAID,
     
 def batch():
     '''
-    读取planid.txt文件 获得计划id 批量执行
+    读取buildpaylog.txt文件 获得需要补充的日志信息 批量执行
     '''
     for line in open("buildpaylog.txt"):
         line = line.strip('\r\n')

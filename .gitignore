@@ -35,4 +35,6 @@ nosetests.xml
 .project
 .pydevproject
 *.log
+*.txt
 python3/load.bduss
+python3/planid.txt
