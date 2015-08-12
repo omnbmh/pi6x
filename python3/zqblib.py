@@ -126,7 +126,9 @@ class ZQB():
         '''
         查询计划的所有计划执行
         '''
-        data = {'fkPalnexecutionPlan':self.planid, 'page':'1','state':state,'rows':'20',"sort":'period',"order":"asc"}
+        data = {'fkPalnexecutionPlan':self.planid, 'page':'1','rows':'20',"sort":'period',"order":"asc"}
+        if state:
+            data['state'] = state
         rt = ZQB.request(constant.SELECT_PLAN_EXECUTION,data)
         jrt = json.loads(rt)
         self.log_info('查询到计划执行' + str(jrt['total']) + '条')
@@ -251,18 +253,24 @@ class ZQB():
         rt = ZQB.request('http://zqbam.creditease.corp/pages/zqDayinterestlog/modZqDayinterestlogBatch.do',data)
         self.log_info('修改日收益结果'+rt)
         
-    def update_plannl(self):
+    def count_plannl(self):
         #查询日收益
         data={'planid':self.planid,'page':1,'rows':760}
         rt = ZQB.request('http://zqbam.creditease.corp/pages/zqDayinterestlog/showZqDayinterestlog.do',data)
         jrt = json.loads(rt)
+        tnum = 0
         if (jrt['total'] > 0):
-            tnum = 0
             for j in jrt['rows']:
                 tnum += j['dayamont']
-            data = {'pkPlan':self.planid,'interestamountnl':tnum}
-            rt = ZQB.request('http://zqbam.creditease.corp/pages/zqPlan/modZqPlan.do',data)
-            self.log_info('修改计划界面收益结果'+rt)
+        return tnum
+            
+    def update_plan(self,plan):
+        '''
+        修复计划的 总投资金额 当前期 已经执行期 界面总收益
+        '''
+        data = {'pkPlan':self.planid,'principalamount':plan['principalamount'],'nowperiod':plan['nowperiod'],'alreadyperiod':plan['alreadyperiod'],'interestamountnl':plan['interestamountnl']}
+        rt = ZQB.request('http://zqbam.creditease.corp/pages/zqPlan/modZqPlan.do',data)
+        self.log_info('修改计划结果'+rt)
         
 class FileLogger():
     def __init__(self, name, file):
