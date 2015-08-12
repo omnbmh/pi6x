@@ -112,7 +112,7 @@ class ZQB():
             
         data['pkPlanexexcution'] = planexecutionid
         
-        if state:
+        if state != None:
             data['state'] = state
         self.log_info(data)
         rt = ZQB.request(constant.SELECT_PLAN_EXECUTION,data)
@@ -127,7 +127,7 @@ class ZQB():
         查询计划的所有计划执行
         '''
         data = {'fkPalnexecutionPlan':self.planid, 'page':'1','rows':'20',"sort":'period',"order":"asc"}
-        if state:
+        if state != None:
             data['state'] = state
         rt = ZQB.request(constant.SELECT_PLAN_EXECUTION,data)
         jrt = json.loads(rt)

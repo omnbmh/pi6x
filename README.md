@@ -2,11 +2,11 @@ pi6x
 ====
 这是一个部署在树莓派的网站
 
-software env
+### software env
 --django 1.6.10
 --Python 3.3.2
 
-hardware env
+### hardware env
 --raspberry pi B
 --arduino uno
 

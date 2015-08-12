@@ -56,13 +56,13 @@ def batch():
             tnum = zqb.count_plannl()
             zqb.plan['principalamount'] = zqb.plan['monthinvestmentamount'] * len(planexecutions)
             #查询全部的计划执行
-            pes = zqb.select_plan_execution(0)
+            pes = zqb.select_plan_execution(None)
             zqb.plan['nowperiod'] = len(pes) + 1
             zqb.plan['alreadyperiod'] = len(planexecutions)
             zqb.plan['interestamountnl'] = tnum
             zqb.update_plan(zqb.plan)
-        #执行每个计划间隔50ms
-        time.sleep(float(50))        
+        #执行每个计划间隔5s
+        time.sleep(float(5))        
     print('执行任务结束')
     
 batch()
