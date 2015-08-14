@@ -6,6 +6,7 @@ import httputils;
 from bs4 import BeautifulSoup
 import sqlite3
 
+# setting sqlite3
 conn = sqlite3.connect('bxt.db3')
 cur = conn.cursor()
 
