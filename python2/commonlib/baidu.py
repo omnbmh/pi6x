@@ -22,6 +22,53 @@ net_type='net_type=3'
 vcode_md5='vcode_md5='
 pn='pn=1'
 
+class BaiduTieba(object):
+    pass
+    
+    def __init__(self,bduss=None):
+        pass
+        
+    def __paramparse__(self,param):
+        # 将url上的参数 转换为dic
+        print param
+        str_arr = param.split('&')
+        print str_arr
+        body_data = {};
+        for str in str_arr:
+            temp_arr = str.split('=')
+            body_data[temp_arr[0]]=temp_arr[1]
+        print body_data
+        return body_data
+        
+    def toString(self):
+        pass
+        
+    def login(self,acc,pwd):
+        # login paramters
+        pwd='passwd='+base64.b64encode(pwd.encode('utf-8')).decode()
+        un="un="+baiduUtf(acc)
+        signmd5= client_id+ client_type+ client_version+ phone_imei+pwd+un+ vcode_md5+"tiebaclient!!!"
+        
+        signbase= client_id+"&"+ client_type+'&'+ client_version+'&'+ phone_imei+'&'+pwd+'&'+un+'&'+ vcode_md5
+        sign='&sign=' + hashlib.md5(signmd5.encode()).hexdigest()
+        
+        data=signbase+sign
+        
+        url='http://c.tieba.baidu.com/c/s/login'
+        # start login
+        data=http.request(url,self.__paramparse__(data))
+        data=json.loads(data)
+        
+        if data['error_code']=='0':
+            #login success & need save bduss
+            bduss=data['user']['BDUSS'].encode('utf-8')
+            bduss = 'BDUSS='+bduss.decode()
+            writebduss(bduss)
+        else:
+            print data['error_msg']
+            bduss = '123'
+        return bduss
+
 def bdussFile():
     if not base_dir:
         return 'load.bduss'
@@ -95,30 +142,6 @@ def sign(bduss):
         time.sleep(float(interval))
     return
     
-def namepwd_login(user=None, password=None):
-    # login paramters
-    
-    password='passwd='+base64.b64encode(password.encode('utf-8')).decode()
-    un="un="+baiduUtf(user)
-    signmd5= client_id+ client_type+ client_version+ phone_imei+password+un+ vcode_md5+"tiebaclient!!!"
-    
-    signbase= client_id+"&"+ client_type+'&'+ client_version+'&'+ phone_imei+'&'+password+'&'+un+'&'+ vcode_md5
-    sign='&sign=' + hashlib.md5(signmd5.encode()).hexdigest()
-    
-    data=signbase+sign
-    url='http://c.tieba.baidu.com/c/s/login'
-    # start login
-    data=http.request(url,data)
-    data=json.loads(data)
-    
-    if data['error_code']=='0':
-        #login success & need save bduss
-        bduss=data['user']['BDUSS'].encode('utf-8')
-        bduss = 'BDUSS='+bduss.decode()
-        writebduss(bduss)
-
-    return bduss
-    
 def auto_login():
     bduss=readbduss()
     if bduss:
@@ -129,4 +152,8 @@ def auto_login():
         bduss = namepwd_login(user,password)
         sign(bduss)
 if __name__ == '__main__':
-    auto_login()
+    #auto_login()
+    tieba = BaiduTieba(None)
+    bduss = tieba.login('deathwi','123456')
+    print bduss
+    

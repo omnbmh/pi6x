@@ -32,8 +32,9 @@ def request(url,data = None,cookie=None):
         req.add_header('Cookie',cookie) 
     
     resp = urllib2.urlopen(req).read()
-    resp = resp.decode('raw_unicode_escape').encode('utf8')
+    resp = resp.decode('raw_unicode_escape')
     print resp
+    return resp
     
 def test_request():
     request('https://www.baidu.com/s',{'wd':'python'},None)
