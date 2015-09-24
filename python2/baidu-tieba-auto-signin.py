@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python3
+﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 # -*- author: c8d8z8@gmail.com
 '''
@@ -12,20 +12,19 @@ logger = logging.getLogger('baidu-tieba')
 logger.info('logging startup');
 
 #python3 之后 configparser 模块 要小写
-import configparser
-config = configparser.ConfigParser()
+import ConfigParser
+config = ConfigParser.ConfigParser()
 config.readfp(open('baidu-tieba.ini'))
 base_dir = config.get('global','base_dir')
 name = config.get('global','name')
 interval = config.get('global','interval')
 
-import urllib.request
+import urllib2
 #import md5
 import hashlib
 import base64
 import json
 import time
-import urllib.parse
 
 # baidu login http request paramters
 client_id='_client_id=wappc_1368589871859_564'
@@ -36,22 +35,30 @@ net_type='net_type=3'
 vcode_md5='vcode_md5='
 pn='pn=1'
 
+# init http request 
+cookie = cookielib.CookieJar()
+opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+urllib2.install_opener(opener)
+opener.addheaders = [('User-agent', 'Mozilla/5.0 (SymbianOS/9.3; Series60/3.2 NokiaE72-1/021.021; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Version/3.0 BrowserNG/7.1.16352')]
+	
+
+
 def httpReady(url,data=None,cookie=None):
     logger.debug('-----request start-----')
     logger.debug('request url:'+url)
     #request url
     if data:
         logger.debug('request data:'+data)
-        req=urllib.request.Request(url,data.encode('utf-8'))
+        req=urllib2.Request(url,data.encode('utf-8'))
     else:
-        req=urllib.request.Request(url)
+        req=urllib2.Request(url)
     #add cookie
     if cookie:
         logger.debug('request cookie:'+cookie)
         req.add_header('Cookie',cookie)    
     #emulate iphone 5s
     req.add_header('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53')
-    v=urllib.request.urlopen(req).read().decode('raw_unicode_escape')
+    v=urllib2.urlopen(req).read().decode('raw_unicode_escape')
     logger.debug('-response-')
     logger.debug(v)
     logger.debug('-----request end-----')
