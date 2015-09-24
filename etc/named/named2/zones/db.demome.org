@@ -1,0 +1,19 @@
+$TTL 604800
+@    IN      SOA    ns.demome.org. root.demome.org. (
+               4    ; Serial
+           604800   ; Refresh
+           86400    ; Retry
+           2419200  ; Expire
+          604800 )  ; Negative Cache TTL
+;
+; name servers - NS records
+     IN     NS     ns.demome.org
+;     IN     NS     ns2.nyc3.example.com.
+
+; name servers - A records
+ns.demome.org     IN     A     192.168.86.128
+
+; 192.168.86.0/24 - A records
+www     IN     A     192.168.86.128
+;tomcat.www1.demome.org.     IN     A     192.168.86.128
+;host2.nyc3.example.com.     IN     NS     10.128.100.102

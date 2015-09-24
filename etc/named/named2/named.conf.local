@@ -1,0 +1,14 @@
+zone "demome.org" {
+    type master;
+    file "/etc/named/zones/db.demome.org"; # zone file path
+};
+
+zone "86.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/named/zones/db.192.168.86"; # 192.168.86.0/24 subnet
+};
+
+zone "0.0.127.in-addr.arpa" {
+    type master;
+    file "/etc/named/zones/db.127.0.0"; # 127.0.0.0/24 subnet
+};
