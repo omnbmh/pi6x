@@ -1,5 +1,7 @@
 ﻿#!/usr/bin/python
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+
+__author__ = 'c8d8z8@gmail.com'
 
 import urllib
 import urllib2
