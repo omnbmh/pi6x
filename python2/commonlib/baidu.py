@@ -52,14 +52,15 @@ class BaiduTieba(object):
         
     def __readbduss__(self):
         #读取bduss信息
-        flie=open(os.path.join(os.path.abspath('.'),'load.bduss'),'r')
-        bduss=flie.read()
-        flie.close()
-        return bduss
+        if os.path.exists(os.path.join(os.path.abspath('.'),BDUSS_FILE)):
+            with open(os.path.join(os.path.abspath('.'),BDUSS_FILE),'r') as file:
+                bduss=flie.read()
+                return bduss
+        return None
         
     def __writebduss__(self,bduss):
         # 写入bduss信息
-        file_object = open('load.bduss', 'w')
+        file_object = open(os.path.join(os.path.abspath('.'),BDUSS_FILE), 'w')
         file_object.write(bduss)
         file_object.close()
         
@@ -89,7 +90,7 @@ class BaiduTieba(object):
             self.__writebduss__(bduss)
         else:
             print data['error_msg']
-            bduss = '123'
+            bduss = None
         return self.bduss_login(bduss)
         
     def bduss_login(self,bduss):
