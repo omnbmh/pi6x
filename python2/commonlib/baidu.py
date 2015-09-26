@@ -4,8 +4,8 @@
 __author__ = 'c8d8z8@gmail.com'
 
 import os
+import sys
 print os.name
-print os.path.abspath('.')
 
 '''
     百度
@@ -52,15 +52,18 @@ class BaiduTieba(object):
         
     def __readbduss__(self):
         #读取bduss信息
-        if os.path.exists(os.path.join(os.path.abspath('.'),BDUSS_FILE)):
-            with open(os.path.join(os.path.abspath('.'),BDUSS_FILE),'r') as file:
-                bduss=flie.read()
+        if os.path.exists(os.path.join(cur_dir(),BDUSS_FILE)):
+            print os.path.join(cur_dir(),BDUSS_FILE)
+            
+            with open(os.path.join(cur_dir(),BDUSS_FILE),'r') as f:
+                # print type(f) # 注意系统变量 file
+                bduss = f.read()
                 return bduss
         return None
         
     def __writebduss__(self,bduss):
         # 写入bduss信息
-        file_object = open(os.path.join(os.path.abspath('.'),BDUSS_FILE), 'w')
+        file_object = open(os.path.join(cur_dir(),BDUSS_FILE), 'w')
         file_object.write(bduss)
         file_object.close()
         
@@ -147,6 +150,12 @@ def baiduUtf(data):
     return urllib.quote_plus(datagb.encode('UTF-8'))
     #return urllib.parse.quote(datagb.encode('utf-8'))
     #return datagb
+def cur_dir():
+    path = sys.path[0]
+    if os.path.isdir(path):
+        return path
+    elif os.path.isfile(path):
+        return os.path.dirname(path)
 
 if __name__ == '__main__':
     tieba = BaiduTieba()
