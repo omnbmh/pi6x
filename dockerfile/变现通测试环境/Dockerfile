@@ -1,24 +1,25 @@
 # VERSION 2015.09.01
-# ±äÏÖÍ¨ ÏîÄ¿×é ²âÊÔ»·¾³ ¾µÏñ
+# å˜ç°é€š é¡¹ç›®ç»„ æµ‹è¯•ç¯å¢ƒ é•œåƒ
 # use:
 # jdk-7u80-linux-x64
+# apache-tomcat-8.0.24
 FROM centos:5
 
 MAINTAINER dezhichen<dezhichen@creditease.cn>
 
-RUN mkdir -p /opt/jdk1.7.0_80
+RUN mkdir -p /app/jdk1.7.0_80
 RUN mkdir -p /app/apache-tomcat-8.0.24
 # install java tomcat tar file, docker can auto unzip
 #ADD apache-tomcat-8.0.24.tar.gz $APP_PATH
 #ADD jdk-7u80-linux-x64.gz $APP_PATH
 
 # add jdk tomcat start_script into image
-ADD jdk1.7.0_80 /opt/jdk1.7.0_80
-ADD apache-tomcat-8.0.24 /app/apache-tomcat-8.0.24
+ADD jdk-7u80-linux-x64.gz /app
+ADD apache-tomcat-8.0.24.tar.gz /app
 #ADD run.sh run.sh
 
 # ENV setting
-ENV JAVA_HOME /opt/jdk1.7.0_80
+ENV JAVA_HOME /app/jdk1.7.0_80
 ENV JRE_HOME $JAVA_HOME/jre
 ENV CLASSPATH .:$JAVA_HOME/lib:$JRE_HOME/lib
 ENV PATH $PATH:$JAVA_HOME/bin
@@ -32,10 +33,11 @@ RUN set -x \
 RUN echo "root:123456" | chpasswd
     
 # open SSH port 22
-#EXPOSE 22
+EXPOSE 22
 
 # open Tomcat port 8080
-#EXPOSE 8080
+EXPOSE 8080
 
 # default script /root/run
 CMD /app/apache-tomcat-8.0.24/bin/startup.sh && /usr/sbin/sshd -D
+#CMD /usr/sbin/sshd -D
