@@ -6,6 +6,8 @@ pi6x
 --django 1.9.1
 --Python 2.7 - 相对于python3 来说 python2 更具挑战性
 Installed /Library/Python/2.7/site-packages/pip-8.0.2-py2.7.egg
+pip install django-bootstrap-toolkit ... Successfully installed django-bootstrap-toolkit-2.15.0
+
 
 ### hardware env
 --raspberry pi B
@@ -18,4 +20,4 @@ webapps
 webapps/resources 存放 jpg png css js
 webapps/resources/lib 存放各种引用的库
 webapps/templates 存放 公共模板
-webapps/*_app
+webapps/*_app 各种子爱破

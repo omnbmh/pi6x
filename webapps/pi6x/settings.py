@@ -35,10 +35,11 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # 支持静态文件
+    'django.contrib.staticfiles',
     'pi6x',
-	'jquery_plugins_demo',
-    'polls',
+    #'jquery_plugins_demo',
+    #'bootstrap_toolkit',
+    
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,7 +100,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Aria/Shanghai'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

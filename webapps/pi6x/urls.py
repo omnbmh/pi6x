@@ -1,3 +1,6 @@
+# -*- coding:utf-8 -*-
+
+__author__ = 'c8d8z8@gmail.com'
 """pi6x URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -27,7 +30,7 @@ urlpatterns = [
     # Examples:
     url(r'^hello/$', pi6x.views.hello),
     # app-polls
-    url(r'^polls/', include('polls.urls', namespace='polls')),
+    #url(r'^polls/', include('polls.urls', namespace='polls')),
     
     # account manage page 
     url('^app_list$', pi6x.views.app_list),
@@ -42,9 +45,11 @@ urlpatterns = [
     #url(r'^$', 'pi6x.views.index', name='index'),
     #url(r'^login$',pi6x.views.login),
     #url(r'^logout$',signout),
-
+    
+    # import apps urls
+    url(r'^solr/', include('searchbysolr_app.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^weibo/', include('weibo.urls')),
+    #url(r'^weibo/', include('weibo.urls')),
     #url(r'^event54/$', event54.views.index),
     #url(r'^event54/authorize', event54.views.authorize),
     #event
