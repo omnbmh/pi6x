@@ -1,6 +1,32 @@
 pi6x
 ====
-这是一个部署在树莓派的网站
+
+玩转树莓派 本项目基于树莓派A版
+
+
+
+Hardware
+CPU:
+Memory:
+OS Last Upgrade: 2016-05-12
+
+初始化树莓派-init
+
+内置服务
+NTP
+rpcbind
+git
+java
+openssh
+
+使用之提供服务
+Tomcat
+Nexus
+Mysql
+Samba
+Nginx
+
+
 
 ### software env
 --django 1.9.1
@@ -10,14 +36,19 @@ pip install django-bootstrap-toolkit ... Successfully installed django-bootstrap
 
 
 ### hardware env
---raspberry pi B
+--raspberry pi A
 --arduino uno
 
-django 目录
-hardware 存放 关于硬件的资料和代码
+dir-profile
 
-webapps
+dir-hardware
+存放 关于硬件的资料和代码
+
+dir-webapps
 webapps/resources 存放 jpg png css js
 webapps/resources/lib 存放各种引用的库
 webapps/templates 存放 公共模板
 webapps/*_app 各种子爱破
+
+dir-docs 
+各种文档的聚集地
