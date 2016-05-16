@@ -10,7 +10,8 @@ CPU:
 Memory:
 OS Last Upgrade: 2016-05-12
 
-初始化树莓派-init
+初始化树莓派
+备份SD卡
 
 内置服务
 NTP
@@ -19,12 +20,20 @@ git
 java
 openssh
 
+
 使用之提供服务
 Tomcat
-Nexus
+Nexus - 官方的package不支持arm等非标准的linux系统
+参考 http://stackoverflow.com/questions/28785464/how-to-fix-missing-platform-binary-nexus-2-11-2-03
 Mysql
 Samba
 Nginx
+openresty  Nginx + Lua
+Nginx Version 1.2.1
+Apache Tomcat 8.0.24
+Java 1.8.0
+Mysql 5.5
+
 
 
 
