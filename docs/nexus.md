@@ -34,5 +34,4 @@ Unable to write to the configured log file: logs/wrapper.log
 Starting Nexus OSS...
 Started Nexus OSS.
 
-
-😄成功了  
+访问 http://＊.*.*.*:8081/nexus/ 😄成功了 由于树莓派的sd卡的容易坏，并且存储也不大，建议可以把库目录放在u盘或者硬盘里面 

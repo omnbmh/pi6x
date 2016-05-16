@@ -8,7 +8,8 @@ pi6x
 Hardware
 CPU:
 Memory:
-OS Last Upgrade: 2016-05-12
+OS: Linux, 4.1.19+, arm
+Last Upgrade: 2016-05-12
 
 初始化树莓派 - https://github.com/omnbmh/pi6x/blob/master/docs/init.md
 备份SD卡
@@ -17,7 +18,7 @@ OS Last Upgrade: 2016-05-12
 NTP
 rpcbind
 git
-java
+Java: 1.8.0, Java HotSpot(TM) Client VM, Oracle Corporation, 25.0-b70
 openssh
 
 
