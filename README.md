@@ -10,7 +10,7 @@ CPU:
 Memory:
 OS Last Upgrade: 2016-05-12
 
-初始化树莓派
+初始化树莓派 - https://github.com/omnbmh/pi6x/blob/master/docs/init.md
 备份SD卡
 
 内置服务
@@ -23,8 +23,8 @@ openssh
 
 使用之提供服务
 Tomcat
-Nexus - 官方的package不支持arm等非标准的linux系统
-参考 http://stackoverflow.com/questions/28785464/how-to-fix-missing-platform-binary-nexus-2-11-2-03
+Nexus - https://github.com/omnbmh/pi6x/blob/master/docs/nexus.md
+非原生 官方的package不支持arm等非标准的linux系统
 Mysql
 Samba
 Nginx
