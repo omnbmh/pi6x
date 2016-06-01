@@ -1,4 +1,4 @@
-pi6x
+pi6x <http://omnbmh.github.io/pi6x>
 ====
 玩转树莓派 本项目基于树莓派A版
 

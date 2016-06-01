@@ -23,6 +23,7 @@ from django.contrib import admin
 #import event54.views
 #import event.views
 import pi6x.views
+#import searchbysolr_app.views
 #import jquery_plugins_demo.views
 #admin.autodiscover()
 
@@ -31,23 +32,23 @@ urlpatterns = [
     #url(r'^hello/$', pi6x.views.hello),
     # app-polls
     #url(r'^polls/', include('polls.urls', namespace='polls')),
-    
-    # account manage page 
+
+    # account manage page
     #url('^app_list$', pi6x.views.app_list),
     #url('^auth/'),
-    
+
     # jquery plugins demo
     #url(r'jquery_plugins_demo',)
-    
-    
-    
+
+
+
     # 程序入口 的 登陆
     #url(r'^$', 'pi6x.views.index', name='index'),
     #url(r'^login$',pi6x.views.login),
     #url(r'^logout$',signout),
-    
+
     # import apps urls
-    #url(r'^solr/', include('searchbysolr_app.urls')),
+    url(r'^solr/', include('searchbysolr_app.urls')),
     #url(r'^admin/', include(admin.site.urls)),
     #url(r'^weibo/', include('weibo.urls')),
     #url(r'^event54/$', event54.views.index),
@@ -55,21 +56,21 @@ urlpatterns = [
     #event
     #url(r'^event/$', event.views.index),
     #url(r'^event/create$', event.views.create),
-    
+
     #url(r'^hello/$', hello),
     #url(r'^time/$', 'firstsite.view.current_datetime', name='current_datetime'),
     #url(r'^time/(\d{1,2})/$', ctime),
-    #url(r'^time/plus/(\d{1,2})/$','firstsite.view.hours_add', name='time-plus'), 
-    #url(r'^person/$','firstsite.view.person', name='person'), 
+    #url(r'^time/plus/(\d{1,2})/$','firstsite.view.hours_add', name='time-plus'),
+    #url(r'^person/$','firstsite.view.person', name='person'),
     #url(r'^.*$', 'firstsite.view.error', name='error'),
-    
+
     # api
     #url('^api/auth/login$', auth_login),
     #url('^api/auth/callback$', auth_callback),
     #url('^api/weibo/home$', weibo_statuses_home_timeline),
     #url('^api/weibo/other/kownperson$', weibo_other_kownperson),
     #url('^api/weibo/post$', weibo_post),
-    
+
     url(r'^sysctl$',pi6x.views.sysctl),
-    
+
   ]

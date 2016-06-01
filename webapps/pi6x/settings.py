@@ -37,9 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pi6x',
-    #'jquery_plugins_demo',
-    #'bootstrap_toolkit',
-    
 )
 
 MIDDLEWARE_CLASSES = (
