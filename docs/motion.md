@@ -31,9 +31,9 @@
     `motion -n`
 
 - 挂载个U盘
-   `sudo mount -t auto -o uid=pi,gid=pi,umask= /dev/sda4 /mnt/32GB_USB_FLASH`
+   `sudo mount -t auto -o uid=pi,gid=pi,umask= /dev/sda4 /mnt/USB_FLASH`
 
 - 其他
-    - 配置网页：http://192.168.99.53:8080
-    - 监控网页：http://192.168.99.53:8081
+    - 配置网页：http://yourip:8080
+    - 监控网页：http://yourip:8081
     - motion官方wiki中的Config options: <http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome>
