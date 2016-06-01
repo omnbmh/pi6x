@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding:utf-8 -*-
 
 __author__ = 'c8d8z8@gmail.com'
@@ -22,18 +23,17 @@ from django.contrib import admin
 #import event54.views
 #import event.views
 import pi6x.views
-#import zanqianba_unump_app.views
 #import jquery_plugins_demo.views
 #admin.autodiscover()
 
 urlpatterns = [
     # Examples:
-    url(r'^hello/$', pi6x.views.hello),
+    #url(r'^hello/$', pi6x.views.hello),
     # app-polls
     #url(r'^polls/', include('polls.urls', namespace='polls')),
     
     # account manage page 
-    url('^app_list$', pi6x.views.app_list),
+    #url('^app_list$', pi6x.views.app_list),
     #url('^auth/'),
     
     # jquery plugins demo
@@ -47,8 +47,8 @@ urlpatterns = [
     #url(r'^logout$',signout),
     
     # import apps urls
-    url(r'^solr/', include('searchbysolr_app.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    #url(r'^solr/', include('searchbysolr_app.urls')),
+    #url(r'^admin/', include(admin.site.urls)),
     #url(r'^weibo/', include('weibo.urls')),
     #url(r'^event54/$', event54.views.index),
     #url(r'^event54/authorize', event54.views.authorize),
@@ -72,7 +72,4 @@ urlpatterns = [
     
     url(r'^sysctl$',pi6x.views.sysctl),
     
-    
-    #zanqianba_unump_app
-    #url(r'^zqbunump$',zanqianba_unump_app.views.unump),
-]
+  ]
