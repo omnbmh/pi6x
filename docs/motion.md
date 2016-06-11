@@ -6,7 +6,7 @@
 
 - 配置
     - 安装完成后，配置文件一般在 `/etc/motion/motion.conf`
-    `sudo vi /etc/motion/motion.conf`
+    - `sudo vi /etc/motion/motion.conf`
     找到
     ``` ini
     control_localhost on
@@ -28,9 +28,37 @@
     设定视频的编码器
 
 - 运行
-    `motion -n`
+    - `motion -n`
 
-- 挂载个U盘
+- 如果你使用的[红外]摄像头模块 这会还不能工作 motion默认是不支持树莓派的摄像头模块的
+- 下载一个修改包 `motion-mmal.tar.gz` 解压 `tar zxvf motion-mmal.tar.gz`
+```
+#sudo mv motion /usr/bin/motion
+#sudo mv motion-mmalcam.conf /etc/motion.conf
+```
+- 注意这里 配置文件复制到了 `/etc/motion.conf` 目前用Service方法启动 默认找这个文件 目前还没找到怎么改动到 `/etc/motion/motion.conf`
+- 重新修改配置文件 按一下修改 其他默认就可以
+```
+daemon on
+width 1024
+height 768
+webcontrol_localhost off
+ffmpeg_output_movies on
+ffmpeg_video_codec msmpeg4
+```
+- 启动报错了 却少依赖包 以下是我碰到的error
+```
+motion: error while loading shared libraries: libavformat.so.53: cannot open shared object file: No such file or directory
+```
+- 使用下面的命令 下载缺少的包
+- 命令一 ： 网上找的
+```
+sudo apt-get install -y libjpeg62 libjpeg62-dev libavformat53 libavformat-dev libavcodec53 libavcodec-dev libavutil51 libavutil-dev libc6-dev zlib1g-dev libmysqlclient18 libmysqlclient-dev libpq5 libpq-dev
+```
+- 命令二：我自己试了下 其他的已经内置 妈蛋 最新的系统怎么装 都不行  原来是缺少 `ffmpeg`
+- `sudo apt-get install ffmpeg`
+
+- 挂载个U盘 树莓派的SD卡稳定性不高 建议挂个U盘或者硬盘
    `sudo mount -t auto -o uid=pi,gid=pi,umask= /dev/sda4 /mnt/USB_FLASH`
 
 - 其他
