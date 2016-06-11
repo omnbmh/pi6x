@@ -95,3 +95,5 @@
     wpa-ssid "YourWifiName"
     wpa-psk "YourWifiPassword"
     ```
+  - 产用命令
+    - `sudo service --status-all` 检测服务状态
