@@ -97,7 +97,7 @@
     ```
 
 * 远程连接 有了树莓派 我们总不能一值连着个显示器 拖着个键鼠
-  * 方案一 SSH 默认已经开启
+  * 方案一 SSH 默认已经开启 用的也是最多的
   * 方案二 xrdp 方便Windows系统使用
     ```
     sudo apt-get update
@@ -112,7 +112,9 @@
     ```
     * 启动服务 运行下面的命令
     * `vncserver :1` 然后输入链接密码 要记住 使用客户端链接的时候要用
-    * 在客户端使用 `your pi's ip:1` 进行连接 可以使用 [VNCViewer](http://www.realvnc.com "www.realvnc.com")
+    * 在Windows/Linux/Unix客户端使用 `your pi's ip:1` 进行连接 可以使用 [VNCViewer](http://www.realvnc.com "www.realvnc.com")
+    * 使用MAC OS内置的VNC应用访问
+      * Finder -> 前往 -> 连接服务器... 输入 `vnc://your pi's ip:5901` 后面的端口号根据实际情况填写
 
 - 常用命令
   - `sudo service --status-all` 检测服务状态
