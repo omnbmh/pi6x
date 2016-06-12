@@ -1,4 +1,5 @@
 * 烧录系统 实用的是2016-05-27的镜像
+* SD卡 兼容性查询 `http://elinux.org/RPi_SD_cards`
   * 推荐新手使用 NOOBS 安装 比较傻瓜式 Go To `https://www.raspberrypi.org/downloads/noobs/` 下载最新的系统 此处不要纠结 一定是最新的好
   * 参考安装文档 `https://www.raspberrypi.org/help/noobs-setup/` 英文不好的 页面有安装视频 😂 你怎么不去死呀
   * 我下载的是 NOOBS_v1_9_2.zip
