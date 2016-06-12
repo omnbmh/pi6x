@@ -12,5 +12,5 @@
         - `dd bs=1M if=/dev/mmcblk0 | gzip > /path/to/raspberry.2016.img.gz`
     - 压缩还原
         - `gzip -dc /path/to/raspberry.2016.img.gz | dd bs=4M of=/dev/mmcblk0`
-
+- 在MAC上 bs 参数为 1m
 - MAC OS 使用 `diskutil  list` 查看磁盘
