@@ -1,4 +1,4 @@
-* 烧录系统
+* 烧录系统 实用的是2016-05-27的镜像
   * 推荐新手使用 NOOBS 安装 比较傻瓜式 Go To `https://www.raspberrypi.org/downloads/noobs/` 下载最新的系统 此处不要纠结 一定是最新的好
   * 参考安装文档 `https://www.raspberrypi.org/help/noobs-setup/` 英文不好的 页面有安装视频 😂 你怎么不去死呀
   * 我下载的是 NOOBS_v1_9_2.zip
@@ -8,7 +8,7 @@
   * Mac OS
   * 下载地址 `https://www.sdcard.org/downloads/formatter_4/eula_mac/SDFormatter_4.00B.pkg`
   * 安装完成后 解压 `NOOBS_v1_9_2.zip` 到 SD 卡中
-  * 将卡插入树莓派 启动 选择 Raspbian 系统进行安装 这里我就不在啰嗦了 文档里面写的细致
+  * 将卡插入树莓派 启动 选择 Raspbian 系统进行安装 这里我就不在啰嗦了 安装界面写的细致
 
 * 配置树莓派
 
@@ -41,7 +41,7 @@
   deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ wheezy main non-free contrib
   deb-src http://mirrors.ustc.edu.cn/raspbian/raspbian/ wheezy main non-free contrib
   ```
-* 无线网路配置
+* 无线网络配置
   * 我的路由器只有两个LAN口，为了节约还是使用wifi吧，建议使用免驱的无线网卡(新的板子自带了wifi和bluetooth)，这样我的树莓派也自由了，省的每天推个线,如果再配上个充电宝，就能移动使用了
   * 执行 `lsusb` 查看是否加载了无线网卡
   ``` code
@@ -95,5 +95,24 @@
     wpa-ssid "YourWifiName"
     wpa-psk "YourWifiPassword"
     ```
-  - 产用命令
-    - `sudo service --status-all` 检测服务状态
+
+* 远程连接 有了树莓派 我们总不能一值连着个显示器 拖着个键鼠
+  * 方案一 SSH 默认已经开启
+  * 方案二 xrdp 方便Windows系统使用
+    ```
+    sudo apt-get update
+    sudo apt-get install xrdp
+    ```
+    * 打开 Windows 的 远程桌面连接 输入 `your pi's ip:1`
+  * 方案二 tinyvnc 通用方案
+    * 安装软件
+    ```
+    sudo apt-get update
+    sudo apt-get install tightvncserver
+    ```
+    * 启动服务 运行下面的命令
+    * `vncserver :1` 然后输入链接密码 要记住 使用客户端链接的时候要用
+    * 在客户端使用 `your pi's ip:1` 进行连接 可以使用 [VNCViewer](http://www.realvnc.com "www.realvnc.com")
+
+- 常用命令
+  - `sudo service --status-all` 检测服务状态
