@@ -43,7 +43,8 @@
   deb-src http://mirrors.ustc.edu.cn/raspbian/raspbian/ wheezy main non-free contrib
   ```
 * 无线网络配置
-  * 我的路由器只有两个LAN口，为了节约还是使用wifi吧，建议使用免驱的无线网卡(新的板子自带了wifi和bluetooth)，这样我的树莓派也自由了，省的每天推个线,如果再配上个充电宝，就能移动使用了
+  * 首先有个无线网卡(有3代的除外) 兼容性查询 `http://elinux.org/RPi_USB_Wi-Fi_Adapters`
+  * 我的路由器只有两个LAN口，为了节约还是使用wifi吧，建议使用免驱的无线网卡(新的板子自带了wifi和bluetooth)，这样我的树莓派也自由了,如果再配上个充电宝，就能移动使用了
   * 执行 `lsusb` 查看是否加载了无线网卡
   ``` code
   Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
@@ -112,8 +113,9 @@
     sudo apt-get install tightvncserver
     ```
     * 启动服务 运行下面的命令
-    * `vncserver :1` 然后输入链接密码 要记住 使用客户端链接的时候要用
-    * 在Windows/Linux/Unix客户端使用 `your pi's ip:1` 进行连接 可以使用 [VNCViewer](http://www.realvnc.com "www.realvnc.com")
+    * `vncserver :1` 然后输入连接密码 要记住 使用客户端链接的时候要用
+    * 在Windows/Linux/Unix客户端应用 推荐 [VNCViewer](http://www.realvnc.com "www.realvnc.com")
+      * 输入 `your pi's ip:1` 进行连接
     * 使用MAC OS内置的VNC应用访问
       * Finder -> 前往 -> 连接服务器... 输入 `vnc://your pi's ip:5901` 后面的端口号根据实际情况填写
 
