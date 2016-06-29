@@ -31,7 +31,8 @@
     - `motion -n`
 
 - 如果你使用的[红外]摄像头模块 这会还不能工作 motion默认是不支持树莓派的摄像头模块的
-- 下载一个修改包 `motion-mmal.tar.gz` 解压 `tar zxvf motion-mmal.tar.gz`
+- 下载一个修改包 `motion-mmal.tar.gz` 百度云盘 `http://pan.baidu.com/s/1bKwkoA`
+- 解压 `tar zxvf motion-mmal.tar.gz`
 ```
 #sudo mv motion /usr/bin/motion
 #sudo mv motion-mmalcam.conf /etc/motion.conf
