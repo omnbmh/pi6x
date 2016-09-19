@@ -43,14 +43,14 @@ urlpatterns = [
 
 
     # 程序入口 的 登陆
-    #url(r'^$', 'pi6x.views.index', name='index'),
+    url(r'^$', 'pi6x.views.index', name='index'),
     #url(r'^login$',pi6x.views.login),
     #url(r'^logout$',signout),
 
     # import apps urls
     url(r'^solr/', include('searchbysolr_app.urls')),
     #url(r'^admin/', include(admin.site.urls)),
-    #url(r'^weibo/', include('weibo.urls')),
+    url(r'^weibo/', include('weibo.urls')),
     #url(r'^event54/$', event54.views.index),
     #url(r'^event54/authorize', event54.views.authorize),
     #event

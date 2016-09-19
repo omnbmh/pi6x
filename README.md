@@ -2,6 +2,14 @@ pi6x <http://omnbmh.github.io/pi6x>
 ====
 玩转树莓派 本项目基于树莓派A版
 
+- B 和 B+ 对比
+|         | B       | B+      |
+| :-----: | :-----: | :-----: |
+| 芯片     | BCM2835 | BCM2835 |
+| 存储     | SD      | TF      |
+| GPIO    | 26      | 40      |
+| Memory  | 512M    | 512M    |
+
 - 内置服务
     - NTP
     - rpcbind
@@ -21,8 +29,6 @@ pi6x <http://omnbmh.github.io/pi6x>
 
 ====
 - Hardware `存放 关于硬件的资料和代码`
-    - CPU:
-    - Memory:
     - OS: Linux, 4.1.19+, arm
     - Last Upgrade: 2016-05-12
 - Docs `各种文档的聚集地`
@@ -32,13 +38,12 @@ pi6x <http://omnbmh.github.io/pi6x>
 - Profile
 - Webapps
     - webapps/resources 存放 jpg png css js
-    - webapps/resources/lib 存放各种引用的库
     - webapps/templates 存放 公共模板
 
 
 ### software env
 - django 1.9.1
-- Python 2.7
+- Python 2.7.10
 
 
 ### hardware env

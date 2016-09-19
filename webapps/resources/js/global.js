@@ -1,15 +1,15 @@
 ;(function(window, undefined){
     "use strict";
     var $ = window.jQuery;
-    
-    $.ajaxSetup({data:{author:'dezhi'}, cache:false });
-    
+
+    $.ajaxSetup({data:{author:'***'}, cache:false });
+
     // 模板
     var tmpl ={
         weibo:$.templates('#weibo'),
         head:$.templates('#head')
     }
-    
+
     var load = function (){
         // 加载可能认识的人
         $.getJSON('api/weibo/other/kownperson',function(data){
@@ -19,7 +19,7 @@
                 $('#kown-boxes').append($html);
             }
         });
-    
+
         $.getJSON('api/weibo/home',function(data){
             for (var i = 0, j = data.data.info.length; i<j;i++){
                 var weibo = data.data.info[i];
@@ -28,9 +28,9 @@
             }
         });
     };
-    
+
     load();
-    
+
     // 发送微博
     $(document).on('click', "a[action-type='post']", function() {
         var $this = $(this).closest('div.p1_box');
