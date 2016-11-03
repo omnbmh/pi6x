@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
     <title>{% block title %} Raspberry Pi by django {% endblock %}</title>
 
     <!-- Bootstrap -->
@@ -39,7 +40,7 @@
               <li><a href="#">Edit</a></li>
               <li><a href="#">Settings</a></li>
               <li class="divider"></li>
-              <li><a href="#">Exit</a></li>
+              <li><a href="/weibo/signout">Exit</a></li>
             </ul>
           </li>
         </ul>
@@ -65,6 +66,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <!-- script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script -->
+    <script type="text/javascript" src="{% static 'js/lib/jsviews.min.js' %}" ></script>
     <!-- script src="{% static 'js/global.js' %}"></script -->
     {% block js %}{% endblock %}
   </body>

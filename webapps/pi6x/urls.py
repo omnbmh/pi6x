@@ -2,30 +2,13 @@
 # -*- coding:utf-8 -*-
 
 __author__ = 'c8d8z8@gmail.com'
-"""pi6x URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
 from django.conf.urls import include, url
 from django.contrib import admin
 
-#import event54.views
-#import event.views
 import pi6x.views
 #import searchbysolr_app.views
 #import jquery_plugins_demo.views
-#admin.autodiscover()
 
 urlpatterns = [
     # Examples:
@@ -40,8 +23,6 @@ urlpatterns = [
     # jquery plugins demo
     #url(r'jquery_plugins_demo',)
 
-
-
     # 程序入口 的 登陆
     url(r'^$', 'pi6x.views.index', name='index'),
     #url(r'^login$',pi6x.views.login),
@@ -51,11 +32,6 @@ urlpatterns = [
     url(r'^solr/', include('searchbysolr_app.urls')),
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^weibo/', include('weibo.urls')),
-    #url(r'^event54/$', event54.views.index),
-    #url(r'^event54/authorize', event54.views.authorize),
-    #event
-    #url(r'^event/$', event.views.index),
-    #url(r'^event/create$', event.views.create),
 
     #url(r'^hello/$', hello),
     #url(r'^time/$', 'firstsite.view.current_datetime', name='current_datetime'),
@@ -72,5 +48,6 @@ urlpatterns = [
     #url('^api/weibo/post$', weibo_post),
 
     url(r'^sysctl$',pi6x.views.sysctl),
+    url(r'^api/tomcat_status.json$',pi6x.views.monitor_tomcat),
 
   ]

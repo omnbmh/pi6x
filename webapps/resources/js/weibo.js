@@ -13,16 +13,16 @@
     var load = function (){
         // 加载可能认识的人
         $.getJSON('api/weibo/other/kownperson',function(data){
-            for (var i = 0, j = data.data.length; i<j;i++){
-                var user = data.data[i];
+            for (var i = 0, j = data.users.length; i<j;i++){
+                var user = data.users[i];
                 var $html = $(tmpl.head.render(user));
                 $('#kown-boxes').append($html);
             }
         });
 
         $.getJSON('api/weibo/home',function(data){
-            for (var i = 0, j = data.data.info.length; i<j;i++){
-                var weibo = data.data.info[i];
+            for (var i = 0, j = data.statuses.length; i<j;i++){
+                var weibo = data.statuses[i];
                 var $html = $(tmpl.weibo.render(weibo));
                 $('#weibo-boxes').append($html);
             }
