@@ -43,7 +43,7 @@ pi6x <http://omnbmh.github.io/pi6x>
 
 ### software env
 - django 1.9.1
-- Python 2.7.10
+- Python 2.7.10 mod uwsgi 
 
 
 ### hardware env
