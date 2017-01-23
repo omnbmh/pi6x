@@ -5,9 +5,9 @@ __author__ = 'c8d8z8@gmail.com'
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import pi6x.views
-#import searchbysolr_app.views
 #import jquery_plugins_demo.views
 
 urlpatterns = [
@@ -24,7 +24,7 @@ urlpatterns = [
     #url(r'jquery_plugins_demo',)
 
     # 程序入口 的 登陆
-    url(r'^$', 'pi6x.views.index', name='index'),
+    url(r'^$', pi6x.views.index),
     #url(r'^login$',pi6x.views.login),
     #url(r'^logout$',signout),
 
@@ -34,12 +34,6 @@ urlpatterns = [
     url(r'^weibo/', include('weibo.urls')),
 
     #url(r'^hello/$', hello),
-    #url(r'^time/$', 'firstsite.view.current_datetime', name='current_datetime'),
-    #url(r'^time/(\d{1,2})/$', ctime),
-    #url(r'^time/plus/(\d{1,2})/$','firstsite.view.hours_add', name='time-plus'),
-    #url(r'^person/$','firstsite.view.person', name='person'),
-    #url(r'^.*$', 'firstsite.view.error', name='error'),
-
     # api
     #url('^api/auth/login$', auth_login),
     #url('^api/auth/callback$', auth_callback),
@@ -48,6 +42,9 @@ urlpatterns = [
     #url('^api/weibo/post$', weibo_post),
 
     url(r'^sysctl$',pi6x.views.sysctl),
-    url(r'^api/tomcat_status.json$',pi6x.views.monitor_tomcat),
+    url(r'^api/tomcat_status.json$',pi6x.views.monitor_tomcat)
 
   ]
+#print urlpatterns
+urlpatterns += staticfiles_urlpatterns()
+#print urlpatterns

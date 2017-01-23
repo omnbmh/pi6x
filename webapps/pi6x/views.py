@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
+
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django import template
 from django.template.loader import get_template
@@ -8,7 +9,7 @@ from django.template import loader
 import os
 import datetime
 import json
-import tomcat_is_started
+import tomcat_opt
 
 def login(req):
     t = get_template('login.html')
@@ -46,5 +47,11 @@ def sysctl(req):
 def monitor_tomcat(req):
     ip = req.GET.get('ip');
     port = req.GET.get('port');
-    status = tomcat_is_started.monitor(ip,port);
+    status = tomcat_opt.status(ip,port);
     return HttpResponse(json.dumps({'ip':ip,'port':port,'status':status}));
+
+def shutdown_tomcat(req):
+    return True
+
+def start_tomcat(req):
+    return True

@@ -29,15 +29,16 @@ def signin(req):
 def signout(req):
     req.session.clear()
     req.session.flush()
-    return HttpResponseRedirect('signin')
+    return HttpResponseRedirect('/')
 
 def home(req):
-    t = get_template('index.html')
+    t = get_template('weibo/index.html')
     if 'user' in req.session:
-        c = template.Context({'is_login':'true', 'nick':req.session['user']['nick'], 'name':req.session['user']['name']})
+        c = template.Context({'is_login':'true', 'uid':req.session['user']['uid'], 'name':req.session['user']['name']})
         html = t.render(c)
         return HttpResponse(html)
     return HttpResponseRedirect('signin')
+
 def send(req, id):
     pass
 

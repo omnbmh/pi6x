@@ -9,4 +9,7 @@ urlpatterns = [
     url('^api/weibo/home$', weibo_statuses_home_timeline),
     url('^api/weibo/other/kownperson$', weibo_other_kownperson),
     url('^api/weibo/post$', weibo_post),
+    url('^$', home),
+    url('^home$', home),
+    url('^signout$', signout),
 ]

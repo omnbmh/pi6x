@@ -5,6 +5,15 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Tomcat Status</h3>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default">刷新</button>
+      <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-plus"></span>
+      </button>
+      <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-minus"></span>
+      </button>
+    </div>
   </div>
   <div class="panel-body">
     <p>Tomcat 监测数据</p>
@@ -16,12 +25,20 @@
       <td>地址</td>
       <td>端口</td>
       <td>状态</td>
+      <td>操作</td>
     </tr>
     <tr>
       <td>ctm</td>
       <td>10.100.142.51</td>
       <td>8080</td>
       <td><span style=" color: red;" class="glyphicon glyphicon-remove"></span></td>
+      <td>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default">删除</button>
+          <button type="button" class="btn btn-default">刷新</button>
+          <button type="button" class="btn btn-default">修改</button>
+        </div>
+      </td>
     </tr>
     <tr>
       <td>demome-cxf-1</td>

@@ -4,9 +4,7 @@
 import os
 import commands
 
-
-
-def monitor(ip,port):
+def status(ip,port):
     if not ip or not port:
         return False;
 
@@ -21,6 +19,15 @@ def monitor(ip,port):
     print 'Server IP: %s, Port: %s, Status: %s.' % (ip, port, 'opened' if is_started.endswith('1') else 'closed');
     return is_started.endswith('1');
 
+def opt(ssh_opt,catalina_home,cmd):
+    command = 'ssh '+ ssh_opt +' \'sh '+ catalina_home +'/bin/catalina.sh '+cmd+'\''
+    print 'prepare run command: %s' % command
+    st = commands.getoutput(command);
+    print 'run result: %s' % st;
+    pass
 
 if __name__ == '__main__':
-    monitor('127.0.0.1','8080');
+
+    #opt('-p 2222 yxgly@10.100.142.93','/app/demome-cxf-1','stop -force')
+    opt('-p 2222 yxgly@10.100.142.93','/app/demome-cxf-1','start')
+    status('10.100.142.93','11102');

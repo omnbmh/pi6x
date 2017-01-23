@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}新浪微博首页{% endblock %}
+{% block content %}
+<!--==============================tmpl=================================-->
+<div id='weibo-boxes'></div>
+<div id='kown-boxes'></div>
+<div id='tmpl-boxes'></div>
+{% include 'tmpl/weibo.tmpl' %}
+{% include 'tmpl/head.tmpl' %}
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="{% static 'js/weibo.js' %}" ></script>
+{% endblock %}

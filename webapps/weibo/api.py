@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-__author__ = 'Chen Dezhi (c8d8z8@gmail.com)'
+__author__ = 'c8d8z8@gmail.com'
 __version__ = '1.0'
 
 import time
@@ -61,28 +61,27 @@ def auth_callback(req):
     client.set_access_token(access_token, expires_in)
     u = client.users.show.get(uid=uid)
     # write to session
+    req.session['sina_token'] = r;
     req.session['user'] = {'name':u.name,'uid':uid}
     #return HttpResponse(json.dumps(token), mimetype='text/json; charset=utf-8')
     return HttpResponseRedirect('/')
 
 # GET
 def weibo_statuses_home_timeline(req):
-    oauth2 = OAuth2Handler()
-    oauth2.set_app_key_secret(APP_KEY, APP_SECRET, REDIRECT_URL)
-    oauth2.set_access_token(ACCESS_TOKEN)
-    oauth2.set_openid(OPENID)
-    api = API(oauth2)
-
-    return HttpResponse(json.dumps(api.get.statuses__home_timeline(format = 'json', pageflag = 0, pagetime = 0, reqnum = 50, type = 1, contenttype = 0)), mimetype='text/json; charset=utf-8')
+    sina_token = req.session['sina_token'];
+    u = req.session['user'];
+    client = _create_client()
+    client.set_access_token(sina_token['access_token'], sina_token['expires_in'])
+    statuses = client.statuses.home_timeline.get()
+    return HttpResponse(json.dumps(statuses))
 
 def weibo_other_kownperson(req):
-    oauth2 = OAuth2Handler()
-    oauth2.set_app_key_secret(APP_KEY, APP_SECRET, REDIRECT_URL)
-    oauth2.set_access_token(ACCESS_TOKEN)
-    oauth2.set_openid(OPENID)
-    api = API(oauth2)
-
-    return HttpResponse(json.dumps(api.get.other__kownperson(format='json', reqnum=10, startindex=0)), mimetype='text/json; charset=utf-8')
+    sina_token = req.session['sina_token'];
+    u = req.session['user'];
+    client = _create_client()
+    client.set_access_token(sina_token['access_token'], sina_token['expires_in'])
+    friends = client.friendships.friends.get(uid=u['uid'])
+    return HttpResponse(json.dumps(friends))
 
 #POST
 def weibo_post(req):
