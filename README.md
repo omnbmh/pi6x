@@ -22,7 +22,7 @@ pi6x <http://omnbmh.github.io/pi6x>
     - Apache Tomcat 8.0.24
     - Solr 5.5.0 <https://github.com/omnbmh/pi6x/blob/master/docs/solr.md>
     - Nexus <https://github.com/omnbmh/pi6x/blob/master/docs/nexus.md> `非原生 官方的package不支持arm等非标准的linux系统`
-    - Mysql 5.5
+    - Mysql 5.6
     - Dnsmasq
     - Samba
     - Motion <https://github.com/omnbmh/pi6x/blob/master/docs/motion.md>  `一款多功能监控软件`
@@ -43,7 +43,7 @@ pi6x <http://omnbmh.github.io/pi6x>
 
 ### software env
 - django 1.9.1
-- Python 2.7.10 mod uwsgi 
+- Python 2.7.10 mod uwsgi
 
 
 ### hardware env
