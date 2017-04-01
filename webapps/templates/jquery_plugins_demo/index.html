@@ -1,11 +1,15 @@
+{% extends "base.html" %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
-</head>
-<body>
-	hello jquery plugins demo!
-</body>
-</html>
+{% block title %}jquery plugins{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css' %}">
+{% endblock %}
+{% block content %}
+	<h3>hello jquery plugins demo!</h3>
+	<ul id="treeDemo" class="ztree"></ul>
+{% endblock %}
+{% block js %}
+<script src="{% static 'ztree/3.5.12/js/jquery.ztree.all-3.5.js' %}"></script>
+<script src="{% static 'js/jquery_plugins_demo.js' %}"></script>
+
+{% endblock %}

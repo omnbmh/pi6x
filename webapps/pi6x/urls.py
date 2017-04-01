@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import pi6x.views
-#import jquery_plugins_demo.views
+import jquery_plugins_demo.views
 
 urlpatterns = [
     # Examples:
@@ -21,7 +21,7 @@ urlpatterns = [
     #url('^auth/'),
 
     # jquery plugins demo
-    #url(r'jquery_plugins_demo',)
+    url(r'jquery_plugins_demo',jquery_plugins_demo.views.index),
 
     # 程序入口 的 登陆
     url(r'^$', pi6x.views.index),
