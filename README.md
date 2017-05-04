@@ -24,7 +24,7 @@ pi6x <http://omnbmh.github.io/pi6x>
     - Nexus <https://github.com/omnbmh/pi6x/blob/master/docs/nexus.md> `非原生 官方的package不支持arm等非标准的linux系统`
     - Mysql 5.6
     - Dnsmasq
-    - Samba
+    - Samba <https://github.com/omnbmh/pi6x/blob/master/docs/samba.md>
     - Motion <https://github.com/omnbmh/pi6x/blob/master/docs/motion.md>  `一款多功能监控软件`
 
 ====
