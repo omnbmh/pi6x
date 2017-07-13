@@ -29,9 +29,10 @@ urlpatterns = [
     #url(r'^logout$',signout),
 
     # import apps urls
-    url(r'^solr/', include('searchbysolr_app.urls')),
+    url(r'^solr/', include('solr_search.urls')),
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^weibo/', include('weibo.urls')),
+    url(r'^flume/', include('flume_metrics.urls')),
 
     #url(r'^hello/$', hello),
     # api

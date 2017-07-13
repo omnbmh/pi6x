@@ -1,0 +1,80 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block title %}Flume Metrics{% endblock %}
+{% block content %}
+<canvas id="sourceLineChart" width="400" height="200"></canvas>
+<canvas id="channelLineChart" width="400" height="200"></canvas>
+<canvas id="sinkLineChart" width="400" height="200"></canvas>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script type="text/javascript">
+var PNUM =100;
+var config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: "SOURCE.src_sxb_job",
+                //backgroundColor: window.chartColors.red,
+                //borderColor: window.chartColors.red,
+                data: [],
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            title:{
+                display:true,
+                text:'Flume Source Metrics'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+        }
+    };
+  var addData = function(){
+        $.getJSON('data.json',{},
+        function(data){
+          if((typeof data) == "string"){
+            data = JSON.parse(data);
+          }
+          if (config.data.datasets.length > 0) {
+              if(config.data.labels.length >= PNUM){
+                removeData();
+              }
+              config.data.labels.push("");
+              config.data.datasets.forEach(function(dataset) {
+                  dataset.data.push(data["SINK.sink_sxb_job"]["BatchEmptyCount"]);
+              });
+              window.sourceLineChart.update();
+          }
+          });
+  };
+  var removeData = function(){
+    config.data.labels.splice(0, 1); // remove the label first
+    config.data.datasets.forEach(function(dataset, datasetIndex) {
+        // dataset.data.pop();
+        dataset.data.splice(0, 1);
+    });
+    window.sourceLineChart.update();
+  };
+  $(document).ready(function(){
+    // init chart
+    var ctx = document.getElementById("sourceLineChart").getContext("2d");
+    for(var i = 0; i< PNUM; i++){
+      config.data.labels.push("");
+      config.data.datasets.forEach(function(dataset) {
+          dataset.data.push(null);
+      });
+    }
+    window.sourceLineChart = new Chart(ctx, config);
+    window.setInterval(addData,3000);
+  });
+</script>
+{% endblock %}
