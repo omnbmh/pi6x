@@ -4,11 +4,17 @@ import numpy as np
 import cv2
 import time,datetime
 import threading
+import argparse
+import json
 
+ap = argparse.ArgumentParser()
+ap.add_argument("-c", "--conf", required=True, help="path to the JSON configuration file")
+args=vars(ap.parse_args())
+conf = json.load(open(args["conf"]))
 # 每次检测到运动 抓取视频长度
 RECORD_SECENDS = 10
 # 每秒帧数 流畅度
-FPS = 2
+FPS = conf["fps"]
 # 保存视频文件类型
 FOURCC = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 
