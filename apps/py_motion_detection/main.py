@@ -7,6 +7,8 @@ import threading
 import argparse
 import json
 
+
+print('opencv version: ' + cv2.__version__)
 ap = argparse.ArgumentParser()
 ap.add_argument("-c", "--conf", required=True, help="path to the JSON configuration file")
 args=vars(ap.parse_args())
@@ -16,7 +18,8 @@ RECORD_SECENDS = 10
 # 每秒帧数 流畅度
 FPS = conf["fps"]
 # 保存视频文件类型
-FOURCC = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+FOURCC = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')#opencv2.4
+#FOURCC = cv2.VideoWriter_fourcc('m', 'p', '4', 'v') #opencv3.4
 
 camera = cv2.VideoCapture(0)
 # 选取摄像头 0为默认摄像哦图
